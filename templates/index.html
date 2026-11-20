@@ -1,0 +1,2202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muse Grammar Notes · 英语语法复习库</title>
+  <style>
+    @supports (corner-shape: superellipse(1.25)) {
+      :where(*), :where(*)::before, :where(*)::after {
+        corner-shape: superellipse(1.25);
+      }
+    }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --ink: #0b0b0b;
+      --ink-soft: rgba(0, 0, 0, 0.56);
+      --ink-faint: rgba(0, 0, 0, 0.38);
+      --on-ink: #ffffff;
+      --line: rgba(0, 0, 0, 0.08);
+      --line-strong: rgba(0, 0, 0, 0.14);
+      --spine-ink: #8a8a8a;
+      --quiet-hover: rgba(0, 0, 0, 0.05);
+      --quiet-down: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+      --quiet-down-bg: rgba(0, 0, 0, 0.07);
+
+      /* Physical Keycap Tokens */
+      --key-bg: #f3f3f4;
+      --key-bg-hover: #f8f8f9;
+      --key-bg-down: #ededee;
+      --key-sheen: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0));
+      --key-sheen-down: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0));
+      --key-rim: rgba(0, 0, 0, 0.1);
+      --key-rim-low: rgba(0, 0, 0, 0.17);
+      --key-lift: inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.06), 0 2px 5px -2px rgba(0,0,0,0.12);
+      --key-lift-hover: inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.06), 0 3px 7px -2px rgba(0,0,0,0.16);
+      --key-down: inset 0 1px 2px rgba(0,0,0,0.12), 0 1px 0 rgba(255,255,255,0.9);
+
+      /* Obsidian Active Keycap Tokens */
+      --ink-key-bg: #19191b;
+      --ink-key-bg-hover: #222225;
+      --ink-key-bg-down: #252528;
+      --ink-key-sheen: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0) 45%, rgba(255,255,255,0.05));
+      --ink-key-sheen-down: linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0));
+      --ink-key-rim: #08080a;
+      --ink-key-text: #ffffff;
+      --ink-key-label: 0 -1px 0 rgba(0,0,0,0.3);
+      --ink-key-lift: inset 0 1px 0 rgba(255,255,255,0.26), inset 0 -3px 3px -1.5px rgba(255,255,255,0.22), inset 0 0 0 2px rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,0.2), 0 3px 8px -2px rgba(0,0,0,0.28);
+      --ink-key-down: inset 0 1.5px 3px rgba(0,0,0,0.7), inset 0 -1px 0 rgba(255,255,255,0.12), 0 1px 1px rgba(0,0,0,0.1);
+
+      /* Motion Curves */
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: linear(0, 0.32, 0.78, 1.04, 1.09, 1.06, 1.02, 1, 0.99, 0.99, 1);
+      --ease-settle: cubic-bezier(0.45, 0, 0.2, 1);
+      --key-motion: background-color 0.16s ease, box-shadow 0.14s ease, translate 0.12s cubic-bezier(0.22, 1, 0.36, 1);
+
+      --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
+      --side: 232px;
+      --pad: 18px;
+      color-scheme: light;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0b0b0b;
+      --surface: #161616;
+      --ink: #f2f2f2;
+      --ink-soft: rgba(255, 255, 255, 0.6);
+      --ink-faint: rgba(255, 255, 255, 0.42);
+      --on-ink: #0b0b0b;
+      --line: rgba(255, 255, 255, 0.1);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --spine-ink: #6e6e6e;
+      --quiet-hover: rgba(255, 255, 255, 0.07);
+      --quiet-down: inset 0 1px 2px rgba(0, 0, 0, 0.55);
+      --quiet-down-bg: rgba(0, 0, 0, 0.35);
+
+      --key-bg: #262627;
+      --key-bg-hover: #2d2d2e;
+      --key-bg-down: #212122;
+      --key-sheen: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+      --key-rim: rgba(0, 0, 0, 0.6);
+      --key-rim-low: rgba(0, 0, 0, 0.85);
+      --key-lift: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.45), 0 2px 5px -2px rgba(0,0,0,0.55);
+      --key-lift-hover: inset 0 1px 0 rgba(255,255,255,0.11), inset 0 -1px 0 rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.45), 0 3px 7px -2px rgba(0,0,0,0.65);
+      --key-down: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.05);
+
+      --ink-key-bg: #dededf;
+      --ink-key-bg-hover: #e8e8e9;
+      --ink-key-bg-down: #d6d6d7;
+      --ink-key-sheen: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0) 45%, rgba(255,255,255,0.3));
+      --ink-key-rim: rgba(0, 0, 0, 0.75);
+      --ink-key-text: #0b0b0b;
+      --ink-key-label: 0 1px 0 rgba(255,255,255,0.45);
+      --ink-key-lift: inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -3px 3px -1.5px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.5), 0 3px 8px -2px rgba(0,0,0,0.55);
+      --ink-key-down: inset 0 1.5px 3px rgba(0,0,0,0.38), inset 0 -1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(255,255,255,0.05);
+      color-scheme: dark;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.32s;
+      animation-timing-function: ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 13.5px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Editorial Shell */
+    .shell {
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    /* Left Fixed Editorial Spine Sidebar */
+    .side {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 15;
+      border-right: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .side-inner {
+      height: 100%;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.025em;
+    }
+    .brand-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: var(--ink);
+      color: var(--on-ink);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .brand-beta {
+      border: 1px solid var(--line-strong);
+      color: var(--ink-faint);
+      font: 500 9px/1 var(--font-mono);
+      letter-spacing: 0.04em;
+      border-radius: 999px;
+      padding: 2px 6px;
+    }
+    .prefs {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .quiet-btn {
+      width: 28px;
+      height: 28px;
+      border: 0;
+      background: transparent;
+      color: var(--ink-soft);
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-grid;
+      place-items: center;
+      font-size: 14px;
+      transition: background-color 0.12s, color 0.12s, box-shadow 0.12s;
+    }
+    .quiet-btn:hover { background: var(--quiet-hover); color: var(--ink); }
+    .quiet-btn:active { background: var(--quiet-down-bg); box-shadow: var(--quiet-down); color: var(--ink); }
+    .quiet-btn[data-off="true"] { opacity: 0.45; }
+
+    /* Cover Progress Ruler + Vertical Spine + Organic Color Block */
+    .cover {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .cover-progress-wrap {
+      cursor: pointer;
+      border-radius: 6px;
+      padding: 4px 0 2px;
+      transition: opacity 0.16s ease;
+    }
+    .cover-progress-wrap:hover { opacity: 0.82; }
+    .cover-progress {
+      --tick: color-mix(in srgb, var(--ink) 28%, transparent);
+      border-top: 1px solid var(--ink-faint);
+      background:
+        linear-gradient(var(--ink), var(--ink)) 0 0 / max(4px, calc(100% * var(--done, 1))) 100% no-repeat,
+        linear-gradient(var(--tick), var(--tick)) 100% 0 / 1px 100% no-repeat,
+        repeating-linear-gradient(to right, var(--tick) 0 1px, transparent 1px 10%) 0 0 / 100% 100% no-repeat;
+      height: 6px;
+      transition: background-size 0.7s var(--ease-out);
+    }
+    .cover-meta {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+      font: 500 10.5px/1 var(--font-mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+    }
+    .cover-of { color: var(--ink-faint); }
+
+    .cover-spine {
+      flex: 1;
+      min-height: 150px;
+      margin: 14px 0 12px -18px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+    .cover-spine p {
+      margin: 0;
+      writing-mode: vertical-rl;
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bg);
+      -webkit-text-stroke: 1.5px var(--spine-ink);
+      paint-order: stroke fill;
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.28) 12%, #000 58%);
+      mask-image: linear-gradient(to right, rgba(0,0,0,0.28) 12%, #000 58%);
+      translate: -14% 0;
+    }
+
+    .cover-block {
+      height: 124px;
+      flex: none;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(60% 90% at 74% 18%, rgba(255,255,255,0.42), transparent 70%),
+        radial-gradient(38% 80% at 4% 72%, #ffb652, transparent 72%),
+        radial-gradient(55% 110% at 0% 62%, #ffe250, transparent 70%),
+        radial-gradient(52% 110% at 104% 62%, #8387ff, transparent 72%),
+        radial-gradient(46% 100% at 92% 108%, #c986fc, transparent 72%),
+        radial-gradient(60% 100% at 50% 120%, #5f8c00, transparent 72%),
+        linear-gradient(135deg, #3c6b4a 40%, #7e78ff);
+      background-size: 118% 118%;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+      animation: cover-breathe 11s ease-in-out infinite alternate;
+      transition: filter 0.45s var(--ease-out), transform 0.25s var(--ease-out);
+    }
+    @keyframes cover-breathe {
+      0% { background-position: 0% 45%; }
+      50% { background-position: 100% 55%; }
+      100% { background-position: 35% 100%; }
+    }
+    :root[data-theme="dark"] .cover-block {
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+    .cover-block:hover { transform: scale(1.015); }
+    .cover-block-label {
+      position: absolute;
+      left: 10px;
+      bottom: 8px;
+      font: 600 10px/1 var(--font-mono);
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.88);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      text-transform: uppercase;
+    }
+
+    .side-foot {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .side-foot-meta {
+      display: flex;
+      justify-content: space-between;
+      font: 500 11px/1.2 var(--font-mono);
+      color: var(--ink-faint);
+    }
+
+    /* Main Right Canvas */
+    .main {
+      min-width: 0;
+      padding: 0 28px 72px;
+    }
+
+    /* Sticky Minimalist Topbar */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      height: 62px;
+      margin: 0 -28px 20px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: box-shadow 0.2s ease;
+    }
+    .top[data-stuck="true"] {
+      box-shadow: 0 1px 0 var(--line);
+    }
+
+    /* Physical Keycap Chips + Sliding Clipped Dark Mask */
+    .chips-wrap {
+      position: relative;
+      display: inline-flex;
+      padding: 4px;
+      margin: -4px;
+    }
+    .chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .chip-mark {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      clip-path: inset(-6px var(--mark-r, 100%) -10px var(--mark-l, 0px));
+      transition: clip-path 0.36s var(--ease-spring);
+      z-index: 2;
+    }
+    .chips-wrap:not([data-mask="true"]) .chip-mark {
+      opacity: 0;
+    }
+    .chip {
+      border: 1px solid;
+      border-color: var(--key-rim) var(--key-rim) var(--key-rim-low);
+      background: var(--key-sheen) var(--key-bg);
+      height: 30px;
+      box-shadow: var(--key-lift);
+      color: var(--ink-soft);
+      font: 500 13px/28px var(--font-text);
+      cursor: pointer;
+      transition: var(--key-motion), color 0.12s ease;
+      border-radius: 8px;
+      padding: 0 13px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chip:hover {
+      background-color: var(--key-bg-hover);
+      box-shadow: var(--key-lift-hover);
+      color: var(--ink);
+    }
+    .chip:active {
+      background-image: var(--key-sheen-down);
+      background-color: var(--key-bg-down);
+      box-shadow: var(--key-down);
+      translate: 0 1px;
+    }
+    .chips-wrap:not([data-mask="true"]) .chip[data-pressed="true"],
+    .chip-obsidian {
+      border-color: var(--ink-key-rim);
+      background: var(--ink-key-sheen) var(--ink-key-bg);
+      box-shadow: var(--ink-key-lift);
+      color: var(--ink-key-text);
+      text-shadow: var(--ink-key-label);
+    }
+    .chips-wrap:not([data-mask="true"]) .chip[data-pressed="true"]:active,
+    .chip-obsidian:active {
+      background: var(--ink-key-sheen-down) var(--ink-key-bg-down);
+      box-shadow: var(--ink-key-down);
+      translate: 0 1px;
+    }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), inset 0 0 0 1px var(--line);
+      min-width: 210px;
+      transition: box-shadow 0.15s ease;
+    }
+    .search-box:focus-within {
+      box-shadow: inset 0 0 0 1.5px var(--ink);
+      background: var(--bg);
+    }
+    .search-box input {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      outline: none;
+      font-size: 13px;
+      width: 100%;
+    }
+    kbd {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--ink-faint);
+      box-shadow: inset 0 -1px 0 var(--line-strong), 0 0 0 1px var(--line);
+    }
+
+    /* Editorial Dashboard: Odometer + Hatched Bar Chart */
+    .dash {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+      gap: 24px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      border-radius: 16px;
+      background: var(--bg);
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+    .dash-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .dash-kicker {
+      font: 500 11px/1 var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .dash-title {
+      margin: 6px 0 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      text-wrap: balance;
+    }
+    .dash-sub {
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .odo-row {
+      display: flex;
+      gap: 24px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .odo-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .odo-label {
+      font-size: 11.5px;
+      color: var(--ink-faint);
+    }
+    .odo {
+      --odo-edge: 0.25em;
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      line-height: 1.1;
+    }
+    .odo-col {
+      display: inline-flex;
+      overflow: hidden;
+      margin: calc(-1 * var(--odo-edge)) -0.04em;
+      padding: var(--odo-edge) 0.04em;
+      -webkit-mask-image: linear-gradient(transparent, #000 var(--odo-edge), #000 calc(100% - var(--odo-edge)), transparent);
+      mask-image: linear-gradient(transparent, #000 var(--odo-edge), #000 calc(100% - var(--odo-edge)), transparent);
+    }
+    .odo-glyph {
+      display: inline-block;
+      animation: odo-in 0.6s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+      animation-delay: calc(0.08s + var(--i, 0) * 45ms);
+    }
+    @keyframes odo-in {
+      0% { opacity: 0; filter: blur(5px); transform: translateY(0.75em) scale(0.86); }
+    }
+
+    /* Hatched Bar Chart (vibedesign.tips exact texture & tooltip) */
+    .chart {
+      --gap: 6px;
+      --axis: 32px;
+      --hatch: color-mix(in srgb, var(--ink) 22%, transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font: 500 11px/1 var(--font-mono);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+    .chart-plot {
+      height: 124px;
+      margin-top: 26px;
+      margin-right: var(--axis);
+      position: relative;
+    }
+    .chart-tick {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(var(--y) * 100%);
+      border-top: 1px dashed color-mix(in srgb, var(--ink) 12%, transparent);
+      height: 0;
+    }
+    .chart-tick span {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 8px);
+      transform: translateY(-50%);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      font-variant-numeric: tabular-nums;
+    }
+    .chart-bars {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      gap: var(--gap);
+    }
+    .chart-bar {
+      flex: 1;
+      position: relative;
+      cursor: pointer;
+    }
+    .chart-fill {
+      position: absolute;
+      inset: auto 0 0;
+      height: max(8px, calc(var(--h) * 100%));
+      border-radius: 5px;
+      background: color-mix(in srgb, var(--ink) 5%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
+      animation: chart-rise 0.68s var(--ease-out) backwards calc(70ms + var(--i, 0) * 35ms);
+      transition: background-color 0.16s, box-shadow 0.16s;
+    }
+    .chart-fill::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 4px;
+      background: var(--hatch);
+      -webkit-mask-image:
+        repeating-linear-gradient(135deg, #000 0 1px, transparent 1px 5px),
+        repeating-linear-gradient(45deg, #000 0 3px, transparent 3px 5px);
+      mask-image:
+        repeating-linear-gradient(135deg, #000 0 1px, transparent 1px 5px),
+        repeating-linear-gradient(45deg, #000 0 3px, transparent 3px 5px);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
+      transition: background-color 0.16s;
+    }
+    .chart-bar[data-on="true"] .chart-fill {
+      background: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--ink), 0 10px 16px -8px rgba(0, 0, 0, 0.45);
+    }
+    .chart-bar[data-on="true"] .chart-fill::before {
+      background: color-mix(in srgb, var(--on-ink) 28%, transparent);
+    }
+    @keyframes chart-rise {
+      0% { clip-path: inset(100% -12px -24px); }
+      100% { clip-path: inset(-24px -12px); }
+    }
+    .chart-tip {
+      position: absolute;
+      bottom: max(10px, calc(var(--h, 0) * 100%));
+      left: calc((var(--x, 0) + 0.5) * (100% + var(--gap)) / var(--n, 7) - var(--gap) / 2);
+      pointer-events: none;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translate(-50%, 8px) scale(0.92);
+      transition: opacity 0.14s ease, transform 0.22s var(--ease-out), left 0.18s var(--ease-out), bottom 0.18s var(--ease-out);
+      z-index: 4;
+    }
+    .chart[data-active="true"] .chart-tip {
+      opacity: 1;
+      transform: translate(-50%, 4.5px) scale(1);
+    }
+    .chart-tip-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 7px;
+      margin-bottom: 7px;
+      background: var(--bg);
+      color: var(--ink);
+      box-shadow: 0 0 0 1px var(--line-strong), 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      translate: var(--tip-shift, 0px) 0;
+    }
+    .chart-tip-label::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: clamp(12px, calc(50% - var(--tip-shift, 0px)), calc(100% - 12px));
+      width: 6px;
+      height: 6px;
+      background: inherit;
+      box-shadow: 1px 1px 0 var(--line-strong);
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .chart-tip-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--bg);
+      box-shadow: 0 0 0 1.5px var(--ink);
+    }
+    .chart-x {
+      display: flex;
+      gap: var(--gap);
+      margin-top: 8px;
+      margin-right: var(--axis);
+    }
+    .chart-x span {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--ink-faint);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.14s;
+    }
+    .chart-x span[data-on="true"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 0 0 16px;
+    }
+    .sec-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+    }
+    .sec-meta {
+      font: 500 11px/1 var(--font-mono);
+      color: var(--ink-faint);
+    }
+
+    /* Spotlight Topic Card Wall */
+    .feed {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px 18px;
+      margin-bottom: 52px;
+    }
+    .card {
+      position: relative;
+      display: block;
+      transition: scale 0.44s var(--ease-settle);
+      animation: card-in 0.6s var(--ease-out) backwards;
+      animation-delay: min(calc(var(--i, 0) * 55ms), 0.45s);
+    }
+    @keyframes card-in {
+      0% { opacity: 0; filter: blur(12px); translate: 0 12px; }
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      z-index: -1;
+      border-radius: 18px;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 24px 70px -10px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--line);
+      transition: opacity 0.36s var(--ease-settle);
+    }
+    :root[data-theme="dark"] .card::before {
+      box-shadow: 0 24px 70px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px var(--line-strong);
+    }
+    .card-link {
+      display: block;
+      transition: opacity 0.38s var(--ease-settle);
+    }
+    .card[data-focused="true"] {
+      z-index: 6;
+      scale: 1.035;
+      transition: scale 0.52s var(--ease-spring);
+    }
+    .card[data-focused="true"]::before {
+      opacity: 1;
+      transition: opacity 0.24s var(--ease-out);
+    }
+    .card[data-frozen="true"] .card-link {
+      opacity: 0.42;
+    }
+
+    .card-media {
+      position: relative;
+      height: 176px;
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .card-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px var(--line);
+      pointer-events: none;
+    }
+    .card-watermark {
+      position: absolute;
+      right: 12px;
+      top: 4px;
+      font-family: var(--font-mono);
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.055;
+      pointer-events: none;
+      transition: transform 0.35s var(--ease-out), opacity 0.35s ease;
+    }
+    .card[data-focused="true"] .card-watermark {
+      opacity: 0.1;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .card-media-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .issue-tag {
+      font: 600 10.5px/1 var(--font-mono);
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--line);
+    }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+    .status-dot::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+    .status-dot.pending::before { background: var(--ink-faint); }
+
+    /* Miniature Outline Preview inside Card Media */
+    .preview-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .preview-list li {
+      font-size: 12px;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .preview-list li::before {
+      content: "";
+      width: 10px;
+      height: 1px;
+      background: var(--ink-faint);
+      flex: none;
+    }
+
+    .card-caption {
+      padding: 10px 2px 0;
+    }
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    .card-meta {
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-faint);
+      gap: 10px;
+    }
+    .card-summary {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .card-stats {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+      white-space: nowrap;
+      flex: none;
+    }
+
+    /* Taped Lined-Paper Mnemonic Notes Wall (vibedesign.tips exact craft) */
+    .saved-marks {
+      margin-top: 12px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+    .saved-marks-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+      align-items: start;
+      gap: 32px 24px;
+      padding: 12px 4px 8px;
+    }
+    .note {
+      --rule-h: 26px;
+      --paper: #fffdf7;
+      --rule: rgba(64, 112, 178, 0.14);
+      --margin-rule: rgba(222, 84, 72, 0.32);
+      --tape: rgba(236, 220, 172, 0.78);
+      --curl: rgba(0, 0, 0, 0.18);
+      position: relative;
+      display: block;
+      rotate: var(--tilt, 0deg);
+      transition: rotate 0.32s var(--ease-out), translate 0.32s var(--ease-out);
+      animation: note-in 0.56s var(--ease-out) backwards;
+      animation-delay: min(calc(var(--i, 0) * 70ms), 0.35s);
+    }
+    :root[data-theme="dark"] .note {
+      --paper: #1d1c19;
+      --rule: rgba(255, 255, 255, 0.07);
+      --margin-rule: rgba(255, 110, 92, 0.24);
+      --tape: rgba(214, 196, 140, 0.36);
+      --curl: rgba(0, 0, 0, 0.58);
+    }
+    .note:hover, .note:focus-within {
+      translate: 0 -3px;
+      rotate: 0deg;
+    }
+    @keyframes note-in {
+      0% { opacity: 0; translate: 0 -14px; rotate: calc(var(--tilt, 0deg) - 2.5deg); scale: 1.03; }
+    }
+    .note-tape {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      z-index: 2;
+      width: 92px;
+      height: 24px;
+      translate: -50%;
+      rotate: var(--tape-tilt, 0deg);
+      background: linear-gradient(rgba(255,255,255,0.3), transparent 60%), var(--tape);
+      clip-path: polygon(0 0, 100% 0, calc(100% - 3px) 20%, 100% 40%, calc(100% - 3px) 60%, 100% 80%, calc(100% - 2px) 100%, 0 100%, 3px 80%, 0 60%, 3px 40%, 0 20%);
+    }
+    .note-paper {
+      position: relative;
+      padding: var(--rule-h) 18px var(--rule-h) 38px;
+      border-radius: 2px;
+      background:
+        linear-gradient(90deg, transparent 25px, var(--margin-rule) 25px 26px, transparent 26px),
+        repeating-linear-gradient(transparent 0 calc(var(--rule-h) - 1px), var(--rule) calc(var(--rule-h) - 1px) var(--rule-h)) 0 -3px,
+        var(--paper);
+      box-shadow: 0 0 0 0.5px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    }
+    .note-paper::before,
+    .note-paper::after {
+      content: "";
+      position: absolute;
+      bottom: 9px;
+      z-index: -1;
+      width: 46%;
+      height: 22px;
+      box-shadow: 0 12px 12px var(--curl);
+      transition: box-shadow 0.32s var(--ease-out);
+    }
+    .note-paper::before { left: 8px; rotate: -3deg; }
+    .note-paper::after { right: 8px; rotate: 3deg; }
+    .note:hover .note-paper::before,
+    .note:hover .note-paper::after {
+      box-shadow: 0 16px 14px var(--curl);
+    }
+    .note-head {
+      margin: 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: var(--rule-h);
+    }
+    .note-head span {
+      font: 500 10.5px/1 var(--font-mono);
+      color: var(--ink-soft);
+      flex: none;
+    }
+    .note-paper ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .note-paper li {
+      margin-top: var(--rule-h);
+      font-size: 13.5px;
+      line-height: var(--rule-h);
+      color: var(--ink);
+    }
+
+    /* Interactive Muse Extension Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      width: min(640px, 100%);
+      background: var(--bg);
+      border-radius: 18px;
+      padding: 22px 24px;
+      box-shadow: 0 0 0 1px var(--line-strong), 0 28px 80px -20px rgba(0,0,0,0.45);
+      transform: translateY(10px) scale(0.97);
+      transition: transform 0.28s var(--ease-spring);
+    }
+    .modal-backdrop.open .modal-card { transform: translateY(0) scale(1); }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .modal-head h3 { margin: 0; font-size: 16.5px; letter-spacing: -0.015em; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .form-field input {
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 13px;
+      outline: none;
+    }
+    .form-field input:focus { border-color: var(--ink); background: var(--bg); }
+    .code-panel {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--line);
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 6px 0 14px;
+    }
+
+    /* Card Review Badge */
+    .card-badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .review-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font: 600 10.5px/1 var(--font-mono);
+      background: var(--ink);
+      color: var(--on-ink);
+    }
+
+    /* Starred Weak Points Quick Review Section */
+    .starred-sec {
+      display: none;
+      margin-bottom: 34px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+    .starred-sec.has-items { display: block; }
+    .starred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .starred-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--bg);
+      box-shadow: inset 0 0 0 1px var(--line);
+      transition: box-shadow 0.14s ease, translate 0.14s var(--ease-out);
+    }
+    .starred-item:hover {
+      box-shadow: inset 0 0 0 1.5px var(--ink);
+      translate: 0 -1px;
+    }
+    .starred-link {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .starred-topic {
+      font: 600 10px/1 var(--font-mono);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+    .starred-heading {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .starred-remove {
+      border: 0;
+      background: transparent;
+      color: var(--ink-faint);
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: inline-grid;
+      place-items: center;
+      font-size: 13px;
+      flex: none;
+    }
+    .starred-remove:hover { background: var(--quiet-hover); color: var(--ink); }
+
+    /* Cross-Topic Command Palette (⌘K / Ctrl+K) */
+    .cmd-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 75;
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: min(12vh, 96px) 16px 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+    .cmd-backdrop.open { opacity: 1; pointer-events: auto; }
+    .cmd-dialog {
+      width: min(640px, 100%);
+      max-height: min(72vh, 560px);
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px var(--line-strong), 0 32px 90px -20px rgba(0,0,0,0.48);
+      transform: translateY(-8px) scale(0.98);
+      transition: transform 0.22s var(--ease-out);
+    }
+    .cmd-backdrop.open .cmd-dialog { transform: translateY(0) scale(1); }
+    .cmd-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cmd-input-row input {
+      flex: 1;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 15px;
+      font-family: var(--font-text);
+    }
+    .cmd-results {
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmd-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: background-color 0.1s ease;
+    }
+    .cmd-item:hover,
+    .cmd-item[data-active="true"] {
+      background: var(--surface);
+      box-shadow: inset 0 0 0 1px var(--line-strong);
+    }
+    .cmd-item-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .cmd-topic-tag {
+      font: 600 10.5px/1 var(--font-mono);
+      padding: 3px 6px;
+      border-radius: 5px;
+      background: var(--ink);
+      color: var(--on-ink);
+      flex: none;
+    }
+    .cmd-snippet {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    mark.cmd-hit {
+      background: #fef08a;
+      color: #111;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    .cmd-empty {
+      padding: 28px 16px;
+      text-align: center;
+      color: var(--ink-faint);
+      font-size: 13px;
+    }
+    .cmd-suggests {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .cmd-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      border-top: 1px solid var(--line);
+      background: var(--surface);
+      font: 500 11px/1 var(--font-mono);
+      color: var(--ink-faint);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 16px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 80;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--on-ink);
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 14px 32px -8px rgba(0,0,0,0.4);
+      transition: opacity 0.2s ease, transform 0.28s var(--ease-spring);
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Quiet Motion Mode */
+    :root[data-motion="off"] { scroll-behavior: auto; }
+    :root[data-motion="off"] *,
+    :root[data-motion="off"] *::before,
+    :root[data-motion="off"] *::after {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+    }
+    :root[data-motion="off"] .card[data-focused="true"] { scale: 1; }
+    :root[data-motion="off"] .card[data-frozen="true"] .card-link { opacity: 1; }
+    :root[data-motion="off"] .card:hover .card-media::after {
+      box-shadow: inset 0 0 0 1.5px var(--ink);
+    }
+
+    @media (max-width: 960px) {
+      .shell { grid-template-columns: 1fr; }
+      .side {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .cover-spine, .cover-block { display: none; }
+      .dash { grid-template-columns: 1fr; }
+      .main { padding: 0 16px 56px; }
+      .top {
+        height: auto;
+        margin: 0 -16px 18px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .chips-wrap {
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .chips-wrap::-webkit-scrollbar { display: none; }
+      .top-right { width: 100%; }
+      .search-box { min-width: 0; width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- Left Editorial Spine Sidebar -->
+    <aside class="side">
+      <div class="side-inner">
+        <div class="side-head">
+          <a class="brand" href="index.html">
+            <span class="brand-dot">M</span>
+            <span>Muse Notes</span>
+            <span class="brand-beta">专升本</span>
+          </a>
+          <div class="prefs">
+            <button class="quiet-btn" id="motionToggle" type="button" title="开关动效（静谧刷题模式）">✦</button>
+            <button class="quiet-btn" id="themeToggle" type="button" title="切换明暗主题">◐</button>
+          </div>
+        </div>
+
+        <div class="cover">
+          <div class="cover-progress-wrap" id="progressModeToggle" role="button" tabindex="0" title="点击切换：已复习进度 / 已入库进度">
+            <div class="cover-progress" id="coverProgress" style="--done: 0"></div>
+            <div class="cover-meta">
+              <span id="coverProgressLabel">{{BUILT_COUNT}} / {{TOTAL_TOPICS}} TOPICS</span>
+              <span class="cover-of" id="coverProgressTag">BUILT</span>
+            </div>
+          </div>
+
+          <div class="cover-spine" aria-hidden="true">
+            <p>GRAMMAR</p>
+          </div>
+
+          <div class="cover-block" id="coverBlock" title="点击切换光影色相">
+            <span class="cover-block-label">EDITION 2026</span>
+          </div>
+        </div>
+
+        <div class="side-foot">
+          <button class="chip chip-obsidian" id="openMuseHelper" type="button" style="width:100%; justify-content:center;">＋ 扩展 / 更新笔记</button>
+          <div class="side-foot-meta">
+            <span>LINT 0 ERR</span>
+            <span>{{BUILD_DATE}}</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Main Canvas -->
+    <div class="main">
+      <header class="top" id="stickyTop">
+        <div class="chips-wrap" id="filterChipsWrap">
+          <div class="chips" id="filterChips">
+            <button class="chip" data-filter="all" data-pressed="true" type="button">全部专题</button>
+            <button class="chip" data-filter="ready" type="button">已入库</button>
+            <button class="chip" data-filter="high" type="button">高频挖空 (≥20)</button>
+            <div class="chip-mark" id="chipMark" aria-hidden="true">
+              <span class="chip chip-obsidian">全部专题</span>
+              <span class="chip chip-obsidian">已入库</span>
+              <span class="chip chip-obsidian">高频挖空 (≥20)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="chip" id="openCmdPalette" type="button" title="跨专题全局秒搜（⌘K / Ctrl+K）">
+            <span>跨专题秒搜</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <label class="search-box" title="按 / 键筛选专题卡片">
+            <span style="color:var(--ink-faint); font-size:12px;">⌕</span>
+            <input id="topicSearch" type="search" placeholder="筛选专题…" />
+            <kbd>/</kbd>
+          </label>
+        </div>
+      </header>
+
+      <!-- Editorial Dashboard: Odometer + Hatched Bar Chart -->
+      <section class="dash">
+        <div class="dash-left">
+          <div>
+            <div class="dash-kicker">DETERMINISTIC GRAMMAR COMPILER</div>
+            <h1 class="dash-title">手写语法笔记 · 可互动复习图谱</h1>
+            <p class="dash-sub">点击任意专题进入「Markmap 导图 + 挖空遮罩」双栏阅读器；按 <kbd>⌘K</kbd> 跨 7 大专题秒找任意考点。</p>
+          </div>
+
+          <div class="odo-row">
+            <div class="odo-stat">
+              <span class="odo-label">已入库专题</span>
+              <span class="odo" data-odo="{{BUILT_COUNT}}"></span>
+            </div>
+            <div class="odo-stat">
+              <span class="odo-label">背诵挖空点</span>
+              <span class="odo" data-odo="{{TOTAL_CLOZE}}"></span>
+            </div>
+            <div class="odo-stat">
+              <span class="odo-label">底层逻辑卡</span>
+              <span class="odo" data-odo="{{TOTAL_WHY}}"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart" id="topicChart">
+          <div class="chart-head">
+            <span>CLOZE DENSITY BY TOPIC</span>
+            <span>点击柱条直达专题</span>
+          </div>
+          <div class="chart-plot" id="chartPlot">
+            <div class="chart-tick" style="--y: 1"><span id="tickMax">60</span></div>
+            <div class="chart-tick" style="--y: 0.5"><span id="tickMid">30</span></div>
+            <div class="chart-tick" style="--y: 0"><span>0</span></div>
+            <div class="chart-bars" id="chartBars"></div>
+            <div class="chart-tip" id="chartTip">
+              <div class="chart-tip-label" id="chartTipLabel"></div>
+              <div class="chart-tip-dot"></div>
+            </div>
+          </div>
+          <div class="chart-x" id="chartX"></div>
+        </div>
+      </section>
+
+      <!-- ★ Starred Weak Points Quick Review -->
+      <section class="starred-sec" id="starredSection">
+        <div class="sec-head" style="margin-bottom:12px;">
+          <h2 class="sec-title">★ 生疏考点速查 · 考前重点回看</h2>
+          <span class="sec-meta" id="starredCount">0 STARRED</span>
+        </div>
+        <div class="starred-grid" id="starredGrid"></div>
+      </section>
+
+      <!-- Spotlight Topic Card Wall -->
+      <div class="sec-head">
+        <h2 class="sec-title">专题目录 · 悬停聚焦预览</h2>
+        <span class="sec-meta" id="visibleCount">{{BUILT_COUNT}} TOPICS</span>
+      </div>
+      <main class="feed" id="topicGrid"></main>
+
+      <!-- Taped Lined-Paper Mnemonics Wall -->
+      <section class="saved-marks" id="mnemonicSection">
+        <div class="sec-head">
+          <h2 class="sec-title">高频口诀便签墙 · 自动抽取自各专题 [!mnemonic]</h2>
+          <span class="sec-meta" id="mnemonicCount"></span>
+        </div>
+        <div class="saved-marks-list" id="mnemonicGrid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Interactive Muse Extension Modal -->
+  <div class="modal-backdrop" id="museModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="museModalTitle">
+      <div class="modal-head">
+        <h3 id="museModalTitle">后续笔记扩展与 Muse 接口助手</h3>
+        <button class="chip" id="closeMuseModal" type="button">关闭</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="newTopicId">新专题编号 ID</label>
+          <input id="newTopicId" type="text" value="07-adjectives" />
+        </div>
+        <div class="form-field">
+          <label for="newTopicTitle">专题中文标题</label>
+          <input id="newTopicTitle" type="text" value="形容词与副词" />
+        </div>
+        <div class="form-field full">
+          <label for="newTopicSummary">专题摘要（可选）</label>
+          <input id="newTopicSummary" type="text" value="原级、比较级、最高级及高频易混副词辨析" />
+        </div>
+      </div>
+
+      <div class="dash-kicker">1. 本地一键生成合规骨架（自动注册 topics.json）</div>
+      <div class="code-panel" id="cliSnippet"></div>
+
+      <div class="dash-kicker">2. 发送给 Muse 的专属增量更新指令</div>
+      <div class="code-panel" id="musePromptSnippet"></div>
+
+      <div style="display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap;">
+        <button class="chip" id="copyCliBtn" type="button">复制 CLI 命令</button>
+        <button class="chip chip-obsidian" id="copyMuseBtn" type="button">一键复制 Muse 指令</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cross-Topic Command Palette (⌘K / Ctrl+K) -->
+  <div class="cmd-backdrop" id="cmdPalette" aria-hidden="true">
+    <div class="cmd-dialog" role="dialog" aria-modal="true" aria-label="跨专题全局搜索">
+      <div class="cmd-input-row">
+        <span style="color:var(--ink-faint); font-size:15px;">⌕</span>
+        <input id="cmdInput" type="search" placeholder="跨 7 大专题秒搜知识点（如 hospital、university、for sb、反意疑问句）…" autocomplete="off" />
+        <kbd>ESC</kbd>
+      </div>
+      <div class="cmd-results" id="cmdResults"></div>
+      <div class="cmd-foot">
+        <span>↑ ↓ 选择 · Enter 直达小节</span>
+        <span id="cmdStatus">0 RESULTS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const TOPICS = {{TOPICS_JSON}};
+    const MNEMONICS = {{MNEMONICS_JSON}};
+    const SEARCH_INDEX = {{SEARCH_INDEX_JSON}};
+    const BUILT_COUNT = {{BUILT_COUNT}};
+    const TOTAL_TOPICS = {{TOTAL_TOPICS}};
+    const root = document.documentElement;
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeRegExp(str) {
+      return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function readJsonStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function getReviews() {
+      const data = readJsonStorage('muse-grammar-reviews', {});
+      return Array.isArray(data) ? {} : data;
+    }
+
+    function getStars() {
+      const data = readJsonStorage('muse-grammar-stars', []);
+      return Array.isArray(data) ? data : [];
+    }
+
+    function saveStars(stars) {
+      try {
+        localStorage.setItem('muse-grammar-stars', JSON.stringify(stars));
+      } catch {}
+    }
+
+    // Theme Toggle (View Transition)
+    root.dataset.theme = localStorage.getItem('muse-grammar-theme') || 'light';
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      const apply = () => {
+        root.dataset.theme = next;
+        localStorage.setItem('muse-grammar-theme', next);
+      };
+      if (document.startViewTransition && root.dataset.motion !== 'off') {
+        document.startViewTransition(apply);
+      } else {
+        apply();
+      }
+    });
+
+    // Motion Toggle (Quiet Study Mode)
+    const motionBtn = document.getElementById('motionToggle');
+    function applyMotionPref(off) {
+      root.dataset.motion = off ? 'off' : 'on';
+      motionBtn.dataset.off = off ? 'true' : 'false';
+      motionBtn.title = off ? '当前：静谧模式（点击开启动效）' : '当前：物理动效开启（点击切静谧模式）';
+    }
+    applyMotionPref(localStorage.getItem('muse-grammar-motion') === 'off');
+    motionBtn.addEventListener('click', () => {
+      const nextOff = root.dataset.motion !== 'off';
+      localStorage.setItem('muse-grammar-motion', nextOff ? 'off' : 'on');
+      applyMotionPref(nextOff);
+      showToast(nextOff ? '已切换为静谧刷题模式' : '已开启物理弹簧动效');
+    });
+
+    // Spine Progress Ruler (Built vs Reviewed toggle) & Cover Block Hue Shift
+    let progressMode = Object.keys(getReviews()).length > 0 ? 'reviewed' : 'built';
+    function syncProgressRuler() {
+      const reviews = getReviews();
+      const reviewedCount = TOPICS.filter((t) => (reviews[t.id]?.count || 0) > 0).length;
+      const bar = document.getElementById('coverProgress');
+      const label = document.getElementById('coverProgressLabel');
+      const tag = document.getElementById('coverProgressTag');
+      if (progressMode === 'reviewed') {
+        const ratio = TOTAL_TOPICS ? reviewedCount / TOTAL_TOPICS : 0;
+        bar.style.setProperty('--done', String(ratio));
+        label.textContent = `已复习 ${reviewedCount} / ${TOTAL_TOPICS}`;
+        tag.textContent = 'REVIEW';
+      } else {
+        const ratio = TOTAL_TOPICS ? BUILT_COUNT / TOTAL_TOPICS : 0;
+        bar.style.setProperty('--done', String(ratio));
+        label.textContent = `已入库 ${BUILT_COUNT} / ${TOTAL_TOPICS}`;
+        tag.textContent = 'BUILT';
+      }
+    }
+    requestAnimationFrame(syncProgressRuler);
+    const progressToggle = document.getElementById('progressModeToggle');
+    const toggleProgressMode = () => {
+      progressMode = progressMode === 'reviewed' ? 'built' : 'reviewed';
+      syncProgressRuler();
+      showToast(progressMode === 'reviewed' ? '书脊进度已切换：专题复习打卡' : '书脊进度已切换：专题入库完成度');
+    };
+    progressToggle.addEventListener('click', toggleProgressMode);
+    progressToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleProgressMode();
+      }
+    });
+
+    let hueShift = 0;
+    document.getElementById('coverBlock').addEventListener('click', (e) => {
+      hueShift = (hueShift + 38) % 360;
+      e.currentTarget.style.filter = `hue-rotate(${hueShift}deg)`;
+    });
+
+    // Sticky Topbar hairline on scroll
+    const stickyTop = document.getElementById('stickyTop');
+    window.addEventListener('scroll', () => {
+      stickyTop.dataset.stuck = window.scrollY > 8 ? 'true' : 'false';
+    }, { passive: true });
+
+    // True Per-Digit Odometer
+    document.querySelectorAll('[data-odo]').forEach((el) => {
+      const text = String(el.dataset.odo ?? '0');
+      el.innerHTML = text
+        .split('')
+        .map((ch, idx) => `<span class="odo-col"><span class="odo-glyph" style="--i:${idx}">${escapeHtml(ch)}</span></span>`)
+        .join('');
+    });
+
+    // Hatched Bar Chart
+    (function renderChart() {
+      const barsEl = document.getElementById('chartBars');
+      const xEl = document.getElementById('chartX');
+      const chart = document.getElementById('topicChart');
+      const tipLabel = document.getElementById('chartTipLabel');
+      if (!TOPICS.length) return;
+      const maxVal = Math.max(10, ...TOPICS.map((t) => t.clozeCount || 0));
+      const ceilMax = Math.ceil(maxVal / 10) * 10;
+      document.getElementById('tickMax').textContent = String(ceilMax);
+      document.getElementById('tickMid').textContent = String(Math.round(ceilMax / 2));
+      chart.style.setProperty('--n', String(Math.max(1, TOPICS.length)));
+
+      TOPICS.forEach((topic, i) => {
+        const val = topic.clozeCount || 0;
+        const h = Math.max(0.06, val / ceilMax);
+        const bar = document.createElement('div');
+        bar.className = 'chart-bar';
+        bar.innerHTML = `<div class="chart-fill" style="--h:${h.toFixed(3)}; --i:${i}"></div>`;
+
+        const xSpan = document.createElement('span');
+        xSpan.textContent = topic.title.slice(0, 3);
+
+        const activate = () => {
+          barsEl.querySelectorAll('.chart-bar').forEach((b) => b.removeAttribute('data-on'));
+          xEl.querySelectorAll('span').forEach((s) => s.removeAttribute('data-on'));
+          bar.dataset.on = 'true';
+          xSpan.dataset.on = 'true';
+          chart.dataset.active = 'true';
+          chart.style.setProperty('--x', String(i));
+          chart.style.setProperty('--h', h.toFixed(3));
+          tipLabel.textContent = `${topic.title} · ${val} 挖空 / ${topic.whyCount || 0} 逻辑`;
+
+          // Clamp tooltip label inside viewport edges on narrow screens
+          const barRect = bar.getBoundingClientRect();
+          const barCenter = barRect.left + barRect.width / 2;
+          const labelW = tipLabel.offsetWidth;
+          const pad = 8;
+          let shift = 0;
+          if (barCenter - labelW / 2 < pad) {
+            shift = pad - (barCenter - labelW / 2);
+          } else if (barCenter + labelW / 2 > window.innerWidth - pad) {
+            shift = (window.innerWidth - pad) - (barCenter + labelW / 2);
+          }
+          tipLabel.style.setProperty('--tip-shift', `${shift.toFixed(1)}px`);
+        };
+        bar.addEventListener('mouseenter', activate);
+        bar.addEventListener('click', () => {
+          if (topic.built) window.location.href = `${topic.id}.html`;
+          else showToast('该专题尚未录入，请点击左侧「扩展 / 更新笔记」生成');
+        });
+
+        barsEl.appendChild(bar);
+        xEl.appendChild(xSpan);
+      });
+
+      chart.addEventListener('mouseleave', () => {
+        chart.removeAttribute('data-active');
+        barsEl.querySelectorAll('.chart-bar').forEach((b) => b.removeAttribute('data-on'));
+        xEl.querySelectorAll('span').forEach((s) => s.removeAttribute('data-on'));
+      });
+    })();
+
+    // ★ Starred Weak Points Quick Review Section
+    function renderStarred() {
+      const section = document.getElementById('starredSection');
+      const grid = document.getElementById('starredGrid');
+      const countEl = document.getElementById('starredCount');
+      const stars = getStars();
+      if (!stars.length) {
+        section.classList.remove('has-items');
+        grid.innerHTML = '';
+        countEl.textContent = '0 STARRED';
+        return;
+      }
+      section.classList.add('has-items');
+      countEl.textContent = `${stars.length} STARRED`;
+      grid.innerHTML = '';
+
+      stars.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'starred-item';
+        const href = `${item.topicId}.html#${encodeURIComponent(item.slug || '')}`;
+        row.innerHTML = `
+          <a class="starred-link" href="${escapeHtml(href)}">
+            <span class="starred-topic">★ ${escapeHtml(item.topicTitle || item.topicId)}</span>
+            <span class="starred-heading">${escapeHtml(item.heading || item.slug)}</span>
+          </a>
+          <button class="starred-remove" type="button" title="取消星标" aria-label="取消星标">✕</button>
+        `;
+        row.querySelector('.starred-remove').addEventListener('click', () => {
+          const next = getStars().filter((s) => s.key !== item.key);
+          saveStars(next);
+          renderStarred();
+          showToast('已从生疏考点移除');
+        });
+        grid.appendChild(row);
+      });
+    }
+    renderStarred();
+
+    // Filter Chips + Sliding Clipped Dark Mask (.chip-mark) + Spotlight Card Wall
+    let currentFilter = 'all';
+    let currentQuery = '';
+    const filterChipsWrap = document.getElementById('filterChipsWrap');
+    const filterChips = document.getElementById('filterChips');
+    const chipMark = document.getElementById('chipMark');
+
+    function syncChipMark() {
+      const active = filterChips.querySelector('button.chip[data-pressed="true"]');
+      if (!active || !chipMark) return;
+      const parentRect = filterChips.getBoundingClientRect();
+      if (!parentRect.width) return;
+      const activeRect = active.getBoundingClientRect();
+      const left = Math.max(0, activeRect.left - parentRect.left);
+      const right = Math.max(0, parentRect.right - activeRect.right);
+      chipMark.style.setProperty('--mark-l', `${left.toFixed(2)}px`);
+      chipMark.style.setProperty('--mark-r', `${right.toFixed(2)}px`);
+      filterChipsWrap.dataset.mask = 'true';
+    }
+
+    filterChips.addEventListener('click', (e) => {
+      const chip = e.target.closest('button.chip');
+      if (!chip) return;
+      filterChips.querySelectorAll('button.chip').forEach((c) => c.removeAttribute('data-pressed'));
+      chip.dataset.pressed = 'true';
+      currentFilter = chip.dataset.filter;
+      syncChipMark();
+      renderGrid();
+    });
+    requestAnimationFrame(syncChipMark);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncChipMark);
+    }
+    window.addEventListener('resize', syncChipMark);
+
+    const topicGridEl = document.getElementById('topicGrid');
+    function clearCardSpotlight() {
+      topicGridEl.querySelectorAll('.card').forEach((c) => {
+        c.removeAttribute('data-focused');
+        c.removeAttribute('data-frozen');
+      });
+    }
+    topicGridEl.addEventListener('mouseleave', clearCardSpotlight);
+
+    function renderGrid() {
+      const grid = topicGridEl;
+      grid.innerHTML = '';
+      const reviews = getReviews();
+
+      const filtered = TOPICS.filter((t) => {
+        if (currentFilter === 'ready' && !t.built) return false;
+        if (currentFilter === 'high' && (t.clozeCount || 0) < 20) return false;
+        if (currentQuery) {
+          const hay = `${t.id} ${t.title} ${t.summary} ${(t.previewSections || []).join(' ')}`.toLowerCase();
+          if (!hay.includes(currentQuery.toLowerCase())) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('visibleCount').textContent = `${filtered.length} TOPICS`;
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1; padding:42px; text-align:center; color:var(--ink-faint);">没有匹配的专题</div>';
+        return;
+      }
+
+      filtered.forEach((topic, idx) => {
+        const orderStr = String(topic.order).padStart(2, '0');
+        const reviewInfo = reviews[topic.id];
+        const reviewCount = reviewInfo?.count || 0;
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.style.setProperty('--i', String(idx));
+
+        const sectionsHtml = (topic.previewSections || [])
+          .slice(0, 3)
+          .map((s) => `<li>${escapeHtml(s)}</li>`)
+          .join('');
+
+        const reviewBadgeHtml = reviewCount > 0
+          ? `<span class="review-badge" title="最近复习：${escapeHtml(reviewInfo.lastDate || '')}">✓ 已复习 ${reviewCount} 次</span>`
+          : `<span class="status-dot ${topic.built ? '' : 'pending'}">${topic.built ? '已入库' : '待录入'}</span>`;
+
+        const href = topic.built ? `${topic.id}.html` : '#';
+        card.innerHTML = `
+          <a class="card-link" href="${escapeHtml(href)}">
+            <div class="card-media">
+              <span class="card-watermark">${escapeHtml(orderStr)}</span>
+              <div class="card-media-top">
+                <span class="issue-tag">NO.${escapeHtml(orderStr)}</span>
+                <span class="card-badges">${reviewBadgeHtml}</span>
+              </div>
+              <ul class="preview-list">${sectionsHtml}</ul>
+            </div>
+            <div class="card-caption">
+              <div class="card-title-row">
+                <span class="card-title">${escapeHtml(topic.title)}</span>
+                <span class="card-stats">${topic.clozeCount || 0} 挖空 · ${topic.whyCount || 0} 逻辑</span>
+              </div>
+              <div class="card-meta">
+                <span class="card-summary">${escapeHtml(topic.summary)}</span>
+              </div>
+            </div>
+          </a>
+        `;
+
+        if (!topic.built) {
+          card.querySelector('.card-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('该专题尚未录入，请点击左侧「扩展 / 更新笔记」生成');
+          });
+        }
+
+        // Spotlight Focus / Freeze
+        card.addEventListener('mouseenter', () => {
+          if (root.dataset.motion === 'off') return;
+          grid.querySelectorAll('.card').forEach((other) => {
+            if (other === card) {
+              other.dataset.focused = 'true';
+              other.removeAttribute('data-frozen');
+            } else {
+              other.removeAttribute('data-focused');
+              other.dataset.frozen = 'true';
+            }
+          });
+        });
+        card.addEventListener('mouseleave', clearCardSpotlight);
+
+        grid.appendChild(card);
+      });
+    }
+    renderGrid();
+
+    // Taped Lined-Paper Mnemonics Wall
+    (function renderMnemonics() {
+      const section = document.getElementById('mnemonicSection');
+      const grid = document.getElementById('mnemonicGrid');
+      if (!MNEMONICS.length) {
+        section.style.display = 'none';
+        return;
+      }
+      document.getElementById('mnemonicCount').textContent = `${MNEMONICS.length} NOTES`;
+      const tilts = [-1.4, 1.1, -0.9, 1.3, -1.1];
+      const tapeTilts = [1.8, -2.1, 1.4, -1.6, 2.0];
+
+      MNEMONICS.forEach((item, idx) => {
+        const a = document.createElement('a');
+        a.className = 'note';
+        a.href = `${item.topicId}.html`;
+        a.style.setProperty('--i', String(idx));
+        a.style.setProperty('--tilt', `${tilts[idx % tilts.length]}deg`);
+        a.style.setProperty('--tape-tilt', `${tapeTilts[idx % tapeTilts.length]}deg`);
+
+        const linesHtml = (item.lines || [])
+          .map((line) => `<li>${escapeHtml(line)}</li>`)
+          .join('');
+
+        a.innerHTML = `
+          <span class="note-tape" aria-hidden="true"></span>
+          <div class="note-paper">
+            <h3 class="note-head">
+              ${escapeHtml(item.title)}
+              <span>${escapeHtml(item.topicTitle)}</span>
+            </h3>
+            <ul>${linesHtml}</ul>
+          </div>
+        `;
+        grid.appendChild(a);
+      });
+    })();
+
+    // Cross-Topic Command Palette (⌘K / Ctrl+K)
+    const cmdPalette = document.getElementById('cmdPalette');
+    const cmdInput = document.getElementById('cmdInput');
+    const cmdResults = document.getElementById('cmdResults');
+    const cmdStatus = document.getElementById('cmdStatus');
+    let cmdMatches = [];
+    let cmdActiveIdx = 0;
+
+    function highlightKeyword(text, terms) {
+      let html = escapeHtml(text);
+      for (const term of terms) {
+        if (!term) continue;
+        const re = new RegExp(`(${escapeRegExp(escapeHtml(term))})`, 'gi');
+        html = html.replace(re, '<mark class="cmd-hit">$1</mark>');
+      }
+      return html;
+    }
+
+    function buildExcerpt(snippet, terms) {
+      const text = String(snippet || '');
+      if (!text) return '';
+      const lower = text.toLowerCase();
+      let pos = -1;
+      for (const term of terms) {
+        const idx = lower.indexOf(term.toLowerCase());
+        if (idx !== -1 && (pos === -1 || idx < pos)) pos = idx;
+      }
+      if (pos === -1) return text.slice(0, 120) + (text.length > 120 ? '…' : '');
+      const start = Math.max(0, pos - 34);
+      const end = Math.min(text.length, pos + 86);
+      return `${start > 0 ? '…' : ''}${text.slice(start, end)}${end < text.length ? '…' : ''}`;
+    }
+
+    function renderCmdResults(rawQuery) {
+      const q = String(rawQuery || '').trim();
+      const terms = q.split(/\s+/).filter(Boolean);
+      cmdResults.innerHTML = '';
+
+      if (!terms.length) {
+        cmdMatches = [];
+        cmdActiveIdx = 0;
+        cmdStatus.textContent = `${SEARCH_INDEX.length} SECTIONS INDEXED`;
+        cmdResults.innerHTML = `
+          <div class="cmd-empty">
+            <div>输入英文单词、短语或中文语法名，跨 7 大专题直达小节</div>
+            <div class="cmd-suggests">
+              <button class="chip" type="button" data-suggest="hospital">hospital</button>
+              <button class="chip" type="button" data-suggest="university">university</button>
+              <button class="chip" type="button" data-suggest="for sb">for sb</button>
+              <button class="chip" type="button" data-suggest="反意疑问句">反意疑问句</button>
+            </div>
+          </div>
+        `;
+        cmdResults.querySelectorAll('[data-suggest]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            cmdInput.value = btn.dataset.suggest;
+            renderCmdResults(cmdInput.value);
+            cmdInput.focus();
+          });
+        });
+        return;
+      }
+
+      const scored = [];
+      for (const entry of SEARCH_INDEX) {
+        const hayHeading = `${entry.topicTitle} ${entry.heading}`.toLowerCase();
+        const hayAll = `${hayHeading} ${entry.snippet || ''}`.toLowerCase();
+        if (!terms.every((t) => hayAll.includes(t.toLowerCase()))) continue;
+        let score = 0;
+        for (const t of terms) {
+          const tl = t.toLowerCase();
+          if (entry.heading.toLowerCase().includes(tl)) score += 6;
+          if (entry.topicTitle.toLowerCase().includes(tl)) score += 3;
+          if ((entry.snippet || '').toLowerCase().includes(tl)) score += 1;
+        }
+        scored.push({ entry, score });
+      }
+      scored.sort((a, b) => b.score - a.score || (a.entry.order ?? 0) - (b.entry.order ?? 0));
+      cmdMatches = scored.slice(0, 14).map((s) => s.entry);
+      cmdActiveIdx = 0;
+      cmdStatus.textContent = `${scored.length} MATCH${scored.length === 1 ? '' : 'ES'}`;
+
+      if (!cmdMatches.length) {
+        cmdResults.innerHTML = `<div class="cmd-empty">未找到包含「${escapeHtml(q)}」的小节</div>`;
+        return;
+      }
+
+      cmdMatches.forEach((item, idx) => {
+        const a = document.createElement('a');
+        a.className = 'cmd-item';
+        a.href = `${item.topicId}.html#${encodeURIComponent(item.slug)}`;
+        if (idx === 0) a.dataset.active = 'true';
+        const excerpt = buildExcerpt(item.snippet, terms);
+        a.innerHTML = `
+          <div class="cmd-item-head">
+            <span class="cmd-topic-tag">${escapeHtml(item.topicTitle)}</span>
+            <span>${highlightKeyword(item.heading, terms)}</span>
+          </div>
+          ${excerpt ? `<div class="cmd-snippet">${highlightKeyword(excerpt, terms)}</div>` : ''}
+        `;
+        a.addEventListener('mouseenter', () => setCmdActive(idx));
+        cmdResults.appendChild(a);
+      });
+    }
+
+    function setCmdActive(idx) {
+      if (!cmdMatches.length) return;
+      cmdActiveIdx = (idx + cmdMatches.length) % cmdMatches.length;
+      const items = cmdResults.querySelectorAll('.cmd-item');
+      items.forEach((el, i) => {
+        if (i === cmdActiveIdx) {
+          el.dataset.active = 'true';
+          el.scrollIntoView({ block: 'nearest' });
+        } else {
+          el.removeAttribute('data-active');
+        }
+      });
+    }
+
+    function openCmdPalette() {
+      closeModal();
+      cmdPalette.classList.add('open');
+      cmdPalette.setAttribute('aria-hidden', 'false');
+      renderCmdResults(cmdInput.value);
+      setTimeout(() => cmdInput.focus(), 10);
+    }
+    function closeCmdPalette() {
+      cmdPalette.classList.remove('open');
+      cmdPalette.setAttribute('aria-hidden', 'true');
+    }
+
+    document.getElementById('openCmdPalette').addEventListener('click', openCmdPalette);
+    cmdPalette.addEventListener('click', (e) => { if (e.target === cmdPalette) closeCmdPalette(); });
+    cmdInput.addEventListener('input', (e) => renderCmdResults(e.target.value));
+    cmdInput.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setCmdActive(cmdActiveIdx + 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setCmdActive(cmdActiveIdx - 1);
+      } else if (e.key === 'Enter' && cmdMatches[cmdActiveIdx]) {
+        e.preventDefault();
+        const item = cmdMatches[cmdActiveIdx];
+        window.location.href = `${item.topicId}.html#${encodeURIComponent(item.slug)}`;
+      }
+    });
+
+    // Interactive Muse Extension Helper Modal
+    const modal = document.getElementById('museModal');
+    const idInput = document.getElementById('newTopicId');
+    const titleInput = document.getElementById('newTopicTitle');
+    const summaryInput = document.getElementById('newTopicSummary');
+    const cliEl = document.getElementById('cliSnippet');
+    const promptEl = document.getElementById('musePromptSnippet');
+
+    // Auto-suggest next topic number
+    const nextOrder = TOPICS.reduce((m, t) => Math.max(m, Number(t.order) || 0), -1) + 1;
+    idInput.value = `${String(nextOrder).padStart(2, '0')}-adjectives`;
+
+    function syncHelperSnippets() {
+      const id = idInput.value.trim() || `${String(nextOrder).padStart(2, '0')}-new-topic`;
+      const title = titleInput.value.trim() || '新语法专题';
+      const summary = summaryInput.value.trim() || `${title}核心规则与高频考点`;
+      cliEl.textContent = `npm run new -- --id ${id} --title "${title}" --summary "${summary}"`;
+      promptEl.textContent = `请先读取仓库根目录的 SKILL.md 和 schema/topics.json。我将上传「${title}」相关的手写英语语法笔记照片，请你严格按 SKILL.md 规范识图、去重、修正笔误（记入文末 > [!errata]）、补充 > [!why] 底层逻辑、用 ==...== 标记核心考点，并增量合并提交到 notes/${id}.md（若为新专题请先在 schema/topics.json 注册）。`;
+    }
+    [idInput, titleInput, summaryInput].forEach((inp) => inp.addEventListener('input', syncHelperSnippets));
+    syncHelperSnippets();
+
+    function openModal() {
+      closeCmdPalette();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    document.getElementById('openMuseHelper').addEventListener('click', openModal);
+    document.getElementById('closeMuseModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // Search + Global Shortcuts
+    const searchInput = document.getElementById('topicSearch');
+    searchInput.addEventListener('input', (e) => {
+      currentQuery = e.target.value.trim();
+      renderGrid();
+    });
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (cmdPalette.classList.contains('open')) closeCmdPalette();
+        else openCmdPalette();
+        return;
+      }
+      const inInput = /INPUT|TEXTAREA/.test(document.activeElement?.tagName || '');
+      if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !inInput && !modal.classList.contains('open') && !cmdPalette.classList.contains('open')) {
+        e.preventDefault();
+        searchInput.focus();
+      } else if (e.key === 'Escape') {
+        if (cmdPalette.classList.contains('open')) {
+          closeCmdPalette();
+          return;
+        }
+        closeModal();
+        if (document.activeElement === searchInput) {
+          searchInput.value = '';
+          currentQuery = '';
+          searchInput.blur();
+          renderGrid();
+        }
+      }
+    });
+
+    // Keep review badges, spine progress, and starred items in sync on back-navigation or cross-tab edits
+    function refreshStudyState() {
+      if (Object.keys(getReviews()).length > 0 && progressMode === 'built') {
+        progressMode = 'reviewed';
+      }
+      syncProgressRuler();
+      renderStarred();
+      renderGrid();
+    }
+    window.addEventListener('pageshow', refreshStudyState);
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'muse-grammar-reviews' || e.key === 'muse-grammar-stars') {
+        refreshStudyState();
+      }
+    });
+
+    async function copyText(text, label) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(`已复制${label}`);
+      } catch {
+        showToast('剪贴板受限，请手动复制');
+      }
+    }
+    document.getElementById('copyCliBtn').addEventListener('click', () => copyText(cliEl.textContent, ' CLI 脚手架命令'));
+    document.getElementById('copyMuseBtn').addEventListener('click', () => copyText(promptEl.textContent, ' Muse 增量更新指令'));
+  </script>
+</body>
+</html>
