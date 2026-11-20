@@ -130,7 +130,7 @@ export function extractSearchIndex(raw, { id, title, order }) {
     if (headingMatch) {
       inErrata = false;
       const level = headingMatch[1].length;
-      const rawHeading = headingMatch[2].trim();
+      const rawHeading = headingMatch[2].replace(/\s+#+\s*$/, '').trim();
       const slug = slugify(rawHeading);
       const cleanedHeading = cleanInlineMarkdown(rawHeading);
 

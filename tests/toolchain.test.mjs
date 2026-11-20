@@ -397,7 +397,36 @@ test('buildAll emits dist/search-index.json with valid slugs and wires Command P
   }
   assert.match(chapterHtml, /\.heading-star\s*\{/);
   assert.match(chapterHtml, /@media print\s*\{/);
+  assert.match(chapterHtml, /\.callout-toggle-hint,/);
+  assert.match(chapterHtml, /window\.addEventListener\('pageshow'/);
+  assert.match(chapterHtml, /window\.addEventListener\('storage'/);
+  assert.match(chapterHtml, /str\.matchAll\(re\)/);
+  assert.match(indexHtml, /str\.matchAll\(re\)/);
+  assert.match(indexHtml, /userPinnedProgressMode/);
   assert.doesNotMatch(chapterHtml, /\{\{[A-Z_]+\}\}/, 'Unresolved template placeholder in dist/04-articles.html');
+});
+
+test('extractSearchIndex strips optional ATX closing hashes to match marked slugs', () => {
+  const md = `---
+id: 04-articles
+title: 冠词
+order: 4
+summary: test
+updated: 2026-11-20
+---
+
+# 冠词
+
+## 闭合标题 ##
+
+- 测试内容
+`;
+  const entries = extractSearchIndex(md, { id: '04-articles', title: '冠词', order: 4 });
+  const { html } = renderMarkdownToHtml(md);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].heading, '闭合标题');
+  assert.equal(entries[0].slug, '闭合标题');
+  assert.ok(html.includes(`id="${entries[0].slug}"`));
 });
 
 

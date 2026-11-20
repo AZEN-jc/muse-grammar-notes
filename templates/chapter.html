@@ -956,6 +956,7 @@
       .cloze-banner,
       .heading-anchor,
       .heading-star,
+      .callout-toggle-hint,
       .chapter-footer-review,
       .cmd-backdrop,
       .toast {
@@ -979,6 +980,7 @@
       .prose h2 { margin-top: 22pt; border-bottom: 1px solid #999; }
       .table-wrap { box-shadow: none; border: 1px solid #999; border-radius: 0; overflow: visible; }
       .prose table { font-size: 9.5pt; }
+      .prose thead { display: table-header-group; }
       .prose th, .prose td { border: 1px solid #bbb !important; padding: 5pt 7pt; color: #000 !important; text-shadow: none !important; }
       .prose td * { opacity: 1 !important; }
       .prose td::after { display: none !important; }
@@ -1388,6 +1390,7 @@
           if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
           const tag = node.parentElement?.tagName;
           if (tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+          if (node.parentElement?.closest('.heading-anchor, .heading-star')) return NodeFilter.FILTER_REJECT;
           return node.nodeValue.toLowerCase().includes(lower)
             ? NodeFilter.FILTER_ACCEPT
             : NodeFilter.FILTER_REJECT;
@@ -1595,23 +1598,34 @@
     let cmdActiveIdx = 0;
 
     function highlightKeyword(text, terms) {
-      let html = escapeHtml(text);
-      for (const term of terms) {
-        if (!term) continue;
-        const re = new RegExp(`(${escapeRegExp(escapeHtml(term))})`, 'gi');
-        html = html.replace(re, '<mark class="cmd-hit">$1</mark>');
+      const str = String(text ?? '');
+      const unique = [...new Set(terms.filter(Boolean))].sort((a, b) => b.length - a.length);
+      if (!unique.length) return escapeHtml(str);
+      const re = new RegExp(unique.map(escapeRegExp).join('|'), 'gi');
+      let out = '';
+      let lastIdx = 0;
+      for (const m of str.matchAll(re)) {
+        const idx = m.index ?? 0;
+        if (idx > lastIdx) out += escapeHtml(str.slice(lastIdx, idx));
+        out += `<mark class="cmd-hit">${escapeHtml(m[0])}</mark>`;
+        lastIdx = idx + m[0].length;
       }
-      return html;
+      if (lastIdx < str.length) out += escapeHtml(str.slice(lastIdx));
+      return out;
     }
 
     function buildExcerpt(snippet, terms) {
       const text = String(snippet || '');
       if (!text) return '';
       const lower = text.toLowerCase();
+      const sortedTerms = [...new Set(terms.filter(Boolean))].sort((a, b) => b.length - a.length);
       let pos = -1;
-      for (const term of terms) {
+      for (const term of sortedTerms) {
         const idx = lower.indexOf(term.toLowerCase());
-        if (idx !== -1 && (pos === -1 || idx < pos)) pos = idx;
+        if (idx !== -1) {
+          pos = idx;
+          break;
+        }
       }
       if (pos === -1) return text.slice(0, 120) + (text.length > 120 ? '…' : '');
       const start = Math.max(0, pos - 34);
@@ -1784,6 +1798,15 @@
         clearSearchHighlights();
         searchInput.blur();
       }
+    });
+    // Keep review & star state synced on back-navigation (bfcache) and cross-tab edits
+    window.addEventListener('pageshow', () => {
+      syncReviewUI();
+      syncStarButtons();
+    });
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'muse-grammar-reviews') syncReviewUI();
+      if (e.key === 'muse-grammar-stars') syncStarButtons();
     });
   </script>
 </body>
