@@ -182,6 +182,103 @@ export function extractSearchIndex(raw, { id, title, order }) {
   return entries;
 }
 
+export function extractClozeCards(raw, { id, title, order }) {
+  const { content } = matter(raw);
+  const slugify = createSlugger();
+  const lines = content.split(/\r?\n/);
+  const cards = [];
+  let inCode = false;
+  let inErrata = false;
+  let currentHeading = title;
+  let currentSlug = '';
+
+  const clozeRe = /==((?:(?!==)[^\n])+)==/g;
+
+  for (const rawLine of lines) {
+    const trimmed = rawLine.trim();
+    if (/^(`{3,}|~{3,})/.test(trimmed)) {
+      inCode = !inCode;
+      continue;
+    }
+    if (inCode) continue;
+
+    if (/^>\s*\[!errata\]/i.test(trimmed)) {
+      inErrata = true;
+      continue;
+    }
+    if (inErrata) {
+      if (!/^>/.test(trimmed)) inErrata = false;
+      else continue;
+    }
+
+    const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const rawHeading = headingMatch[2].replace(/\s+#+\s*$/, '').trim();
+      const slug = slugify(rawHeading);
+      if (level >= 2 && level <= 3) {
+        currentHeading = cleanInlineMarkdown(rawHeading);
+        currentSlug = slug;
+      }
+      continue;
+    }
+
+    if (!clozeRe.test(trimmed)) continue;
+    clozeRe.lastIndex = 0;
+
+    // Normalize table row or list/quote line while preserving ==...== markers
+    let normalized = trimmed
+      .replace(/^>\s*/, '')
+      .replace(/^[-*+]\s+/, '')
+      .replace(/^\d+\.\s+/, '');
+
+    if (/^\|.*\|$/.test(normalized)) {
+      const cells = normalized
+        .slice(1, -1)
+        .split(/(?<!\\)\|/)
+        .map((c) => c.replace(/\\\|/g, '|').trim())
+        .filter(Boolean);
+      normalized = cells.join('  ·  ');
+    }
+
+    // Parse into safe { text, isCloze } segments
+    const parts = [];
+    let last = 0;
+    for (const m of normalized.matchAll(clozeRe)) {
+      if (m.index > last) {
+        const plain = normalized
+          .slice(last, m.index)
+          .replace(/\*\*([^*]+)\*\*/g, '$1')
+          .replace(/`([^`]+)`/g, '$1');
+        if (plain) parts.push({ text: plain, isCloze: false });
+      }
+      const answer = m[1].replace(/\*\*([^*]+)\*\*/g, '$1').replace(/`([^`]+)`/g, '$1').trim();
+      if (answer) parts.push({ text: answer, isCloze: true });
+      last = m.index + m[0].length;
+    }
+    if (last < normalized.length) {
+      const tail = normalized
+        .slice(last)
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/`([^`]+)`/g, '$1');
+      if (tail) parts.push({ text: tail, isCloze: false });
+    }
+
+    if (parts.some((p) => p.isCloze)) {
+      cards.push({
+        topicId: id,
+        topicTitle: title,
+        order,
+        heading: currentHeading,
+        slug: currentSlug,
+        parts,
+      });
+    }
+  }
+
+  return cards;
+}
+
 export function buildAll(rootDir = ROOT_DIR) {
   const { topics } = loadTopicsSchema(rootDir);
   const notesDir = path.join(rootDir, 'notes');
@@ -197,6 +294,7 @@ export function buildAll(rootDir = ROOT_DIR) {
   const builtById = new Map();
   const allMnemonics = [];
   const allSearchEntries = [];
+  const allClozeCards = [];
 
   if (fs.existsSync(notesDir)) {
     const noteFiles = fs
@@ -222,6 +320,7 @@ export function buildAll(rootDir = ROOT_DIR) {
 
       allMnemonics.push(...extractMnemonics(raw, topicMeta));
       allSearchEntries.push(...extractSearchIndex(raw, topicMeta));
+      allClozeCards.push(...extractClozeCards(raw, topicMeta));
 
       builtById.set(id, {
         ...meta,
@@ -290,6 +389,7 @@ export function buildAll(rootDir = ROOT_DIR) {
       CLOZE_COUNT: note.clozeCount,
       WHY_COUNT: note.whyCount,
       TOPIC_PILLS: pillsHtml,
+      TOPICS_JSON: safeJsonForScript(mergedTopics),
       CONTENT_HTML: note.html,
       MINDMAP_JSON: safeJsonForScript(note.mindmapMd),
       SEARCH_INDEX_JSON: searchIndexScriptJson,
@@ -300,6 +400,7 @@ export function buildAll(rootDir = ROOT_DIR) {
 
   // Render index page
   allMnemonics.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  allClozeCards.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   const builtCount = mergedTopics.filter((t) => t.built).length;
   const totalCloze = mergedTopics.reduce((sum, t) => sum + t.clozeCount, 0);
   const totalWhy = mergedTopics.reduce((sum, t) => sum + t.whyCount, 0);
@@ -307,6 +408,7 @@ export function buildAll(rootDir = ROOT_DIR) {
   const indexHtml = injectTemplate(indexTemplate, {
     TOPICS_JSON: safeJsonForScript(mergedTopics),
     MNEMONICS_JSON: safeJsonForScript(allMnemonics),
+    CLOZE_DECK_JSON: safeJsonForScript(allClozeCards),
     SEARCH_INDEX_JSON: searchIndexScriptJson,
     TOTAL_TOPICS: mergedTopics.length,
     BUILT_COUNT: builtCount,
@@ -321,6 +423,7 @@ export function buildAll(rootDir = ROOT_DIR) {
     totalTopics: mergedTopics.length,
     builtCount,
     searchIndexCount: allSearchEntries.length,
+    clozeDeckCount: allClozeCards.length,
     distDir,
   };
 }

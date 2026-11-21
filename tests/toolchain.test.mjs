@@ -380,7 +380,7 @@ test('buildAll emits dist/search-index.json with valid slugs and wires Command P
   for (const hook of ['cmdPalette', 'openCmdPalette', 'progressModeToggle', 'starredSection']) {
     assert.ok(indexHtml.includes(`id="${hook}"`), `Missing #${hook} in dist/index.html`);
   }
-  assert.match(indexHtml, /@keyframes cover-breathe/);
+  assert.match(indexHtml, /\.energy-card\s*\{/);
 
   const mnemonicsMatch = indexHtml.match(/const MNEMONICS = (\[.*\]);/);
   const mnemonics = JSON.parse(mnemonicsMatch[1]);
@@ -429,4 +429,48 @@ updated: 2026-11-20
   assert.ok(html.includes(`id="${entries[0].slug}"`));
 });
 
+test('extractClozeCards extracts safe cloze segments and buildAll wires Round 3 desktop/mobile UX', async () => {
+  const { extractClozeCards } = await import('../src/build.mjs');
+  const md = `---
+id: 01-nouns
+title: 名词
+order: 1
+summary: test
+updated: 2026-11-21
+---
 
+# 名词
+
+## 核心规则
+
+- 等式测试：==a = b== 成立
+\`\`\`md
+- 代码块内 ==ignored==
+\`\`\`
+
+> [!errata] 原稿勘误
+> - 原稿 ==errata_ignored==
+`;
+  const cards = extractClozeCards(md, { id: '01-nouns', title: '名词', order: 1 });
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].slug, '核心规则');
+  assert.ok(cards[0].parts.some((p) => p.isCloze && p.text === 'a = b'));
+
+  const res = buildAll(ROOT_DIR);
+  assert.ok(res.clozeDeckCount >= 50, 'Expected substantial cloze quiz deck');
+
+  const indexHtml = fs.readFileSync(path.join(res.distDir, 'index.html'), 'utf8');
+  assert.match(indexHtml, /id="energyCard"/);
+  assert.match(indexHtml, /id="quizModal"/);
+  assert.match(indexHtml, /const CLOZE_DECK = \[/);
+  assert.doesNotMatch(indexHtml, /\{\{[A-Z_]+\}\}/);
+
+  const chapterHtml = fs.readFileSync(path.join(res.distDir, '01-nouns.html'), 'utf8');
+  assert.match(chapterHtml, /\.workspace\.mode-doc\s*\{\s*grid-template-columns:\s*minmax\(0,\s*1fr\);/);
+  assert.match(chapterHtml, /initialExpandLevel:\s*2/);
+  assert.match(chapterHtml, /maxWidth:\s*220/);
+  assert.match(chapterHtml, /id="mobileDock"/);
+  assert.match(chapterHtml, /id="mobileSheet"/);
+  assert.match(chapterHtml, /function undoTodayReview\(\)/);
+  assert.doesNotMatch(chapterHtml, /\{\{[A-Z_]+\}\}/);
+});
