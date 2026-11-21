@@ -82,18 +82,20 @@ updated: 2026-11-21
 
 #### 1. can / could（过去式 could）
 
-- **① 表示能力**：`Nowadays, many students can speak English ==fluently==.`
-- **② 表示允许**：`Could I ask you a question?`
-- **③ 表示推测**：`can't / couldn't` 译为“一定不……”
+- **表示能力**：能、会做某事
+- **表示允许**：委婉请求允许（`could` 更客气）
+- **表示推测**：否定推测译为“一定不……”
 
-| 结构 | 含义 | 例句 |
+| 用法 / 结构 | 含义 | 例句 |
 | :--- | :--- | :--- |
+| 表示能力 | 能、会 | `Nowadays, many students can speak English ==fluently==.` |
+| 表示允许 | 可以、能 | `Could I ask you a question?` |
 | `can't / couldn't + be` | 一定不…… | `He couldn't be Tom. Tom has gone to America.` |
 
 #### 2. may / might（过去式 might）
 
-- **① 表示请求允许**：`May I come in?`
-- **② 表示推测**：译为“可能，或许”
+- **表示请求允许**：`May I come in?`
+- **表示推测**：译为“可能，或许”
 
 | 结构 | 含义 | 例句 |
 | :--- | :--- | :--- |
@@ -116,8 +118,9 @@ updated: 2026-11-21
 #### 4. should / ought to
 
 - **核心含义**：表示“应该”
-- **例句**：`You should work hard to improve yourself.`
-- **注意**：`ought to` 的否定是 `oughtn't to`（即 `ought not to`）
+- **否定形式**：`ought to` → `==oughtn't to==`
+
+例句：`You should work hard to improve yourself.`（`oughtn't to` 即 `ought not to`）
 
 #### 5. will / would（过去式 would）
 
@@ -256,7 +259,7 @@ updated: 2026-11-21
 ## 延续性动词与非延续性动词
 
 | 分类 | 语法特征 | 高频代表词 | 典型例句 |
-| :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | 延续性动词 | 动作可持续，==可==与时间段连用 | `study`, `work`, `read`, `sleep`, `learn`, `stay`, `keep`, `have`, `wait` | `I have been waiting for you for two hours.` |
 | 非延续性动词（短暂性） | 动作瞬间完成，==不可==与时间段连用 | `go`, `come`, `begin`, `leave`, `arrive`, `die`, `open`, `finish` | `I finished my homework just now.` |
 
