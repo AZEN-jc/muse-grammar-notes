@@ -430,6 +430,63 @@
       font-size: 11.5px;
     }
 
+    /* Floating Mindmap Jump Pill (explore mindmap first, tap pill to read doc) */
+    .mindmap-jump-pill {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translate(-50%, -10px);
+      z-index: 15;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: calc(100% - 28px);
+      padding: 6px 8px 6px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--on-ink);
+      font-size: 12.5px;
+      font-weight: 500;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.26s var(--ease-spring);
+    }
+    .mindmap-jump-pill.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+    .mindmap-jump-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+      opacity: 0.85;
+    }
+    .mindmap-jump-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 5px 11px;
+      background: color-mix(in srgb, var(--on-ink) 18%, transparent);
+      color: var(--on-ink);
+      font: 600 12px/1 var(--font-text);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mindmap-jump-btn:hover { background: color-mix(in srgb, var(--on-ink) 28%, transparent); }
+    .mindmap-jump-close {
+      border: 0;
+      background: transparent;
+      color: var(--on-ink);
+      opacity: 0.65;
+      font-size: 14px;
+      line-height: 1;
+      padding: 2px 5px;
+      cursor: pointer;
+    }
+    .mindmap-jump-close:hover { opacity: 1; }
+
     /* Resizer Handle */
     .split-resizer {
       position: relative;
@@ -1285,6 +1342,11 @@
 
     <div class="workspace mode-split" id="workspace">
       <aside class="mindmap-pane">
+        <div class="mindmap-jump-pill" id="mindmapJumpPill" aria-hidden="true">
+          <span class="mindmap-jump-title" id="mindmapJumpTitle"></span>
+          <button class="mindmap-jump-btn" id="mindmapJumpBtn" type="button">查看对应文档 →</button>
+          <button class="mindmap-jump-close" id="mindmapJumpClose" type="button" aria-label="关闭">×</button>
+        </div>
         <svg id="mindmapSvg"></svg>
         <div class="mindmap-hint">点击节点定位文档 · 滚轮缩放 · 拖拽右侧线调宽</div>
         <div class="mindmap-zoom-controls">
@@ -1701,27 +1763,61 @@
       document.getElementById('zoomInMindmapBtn').addEventListener('click', () => mmInstance?.rescale(1.22));
       document.getElementById('zoomOutMindmapBtn').addEventListener('click', () => mmInstance?.rescale(0.82));
 
+      const jumpPill = document.getElementById('mindmapJumpPill');
+      const jumpTitle = document.getElementById('mindmapJumpTitle');
+      const jumpBtn = document.getElementById('mindmapJumpBtn');
+      const jumpClose = document.getElementById('mindmapJumpClose');
+      let pendingJumpSlug = '';
+
+      function hideJumpPill() {
+        jumpPill.classList.remove('show');
+        jumpPill.setAttribute('aria-hidden', 'true');
+        pendingJumpSlug = '';
+      }
+
+      function showJumpPill(slug, title) {
+        pendingJumpSlug = slug;
+        jumpTitle.textContent = title || slug;
+        jumpPill.classList.add('show');
+        jumpPill.setAttribute('aria-hidden', 'false');
+      }
+
+      jumpBtn.addEventListener('click', () => {
+        const slug = pendingJumpSlug;
+        hideJumpPill();
+        if (slug) scrollToSlug(slug);
+      });
+      jumpClose.addEventListener('click', hideJumpPill);
+
       svg.addEventListener('click', (e) => {
+        // Never hijack Markmap's own fold/unfold circle toggle
+        if (e.target.closest('circle')) return;
+
         const anchor = e.target.closest('a');
-        if (anchor) {
-          const href = anchor.getAttribute('href') || '';
-          if (href.startsWith('#')) {
-            e.preventDefault();
-            scrollToSlug(decodeURIComponent(href.slice(1)));
+        const nodeG = e.target.closest('g.markmap-node');
+        const targetAnchor = anchor || nodeG?.querySelector('a');
+        if (!targetAnchor) return;
+
+        const href = targetAnchor.getAttribute('href') || '';
+        if (!href.startsWith('#')) return;
+        e.preventDefault();
+
+        const slug = decodeURIComponent(href.slice(1));
+        const label = targetAnchor.textContent?.trim() || slug;
+        const isFullscreenMindmap = window.innerWidth <= 900 || workspace.classList.contains('mode-mindmap');
+
+        if (isFullscreenMindmap) {
+          // Tap heading on phone/fullscreen mindmap: expand/collapse branch first so user can read sub-headings
+          const toggleCircle = nodeG?.querySelector('circle');
+          if (toggleCircle && e.isTrusted) {
+            toggleCircle.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           }
+          showJumpPill(slug, label);
           return;
         }
-        const nodeG = e.target.closest('g.markmap-node');
-        if (nodeG) {
-          const a = nodeG.querySelector('a');
-          if (a) {
-            const href = a.getAttribute('href') || '';
-            if (href.startsWith('#')) {
-              e.preventDefault();
-              scrollToSlug(decodeURIComponent(href.slice(1)));
-            }
-          }
-        }
+
+        // Desktop side-by-side split view: smoothly sync right-hand document pane
+        scrollToSlug(slug);
       });
     })();
 
