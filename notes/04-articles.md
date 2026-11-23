@@ -61,9 +61,9 @@ updated: 2026-11-20
 | 世上独一无二 | 太阳、月亮、地球等 | `the earth`, `the sun` |
 | 最高级与序数词 | 形容词最高级、序数词前加 `the` | `the most handsome boy`, `the second tourist` |
 | 序数词特殊排除 | 序数词前已有物主代词或所有格时==不加== `the` | `my second book`（不用 `my the second`） |
-| 空间方位对比 | `in space`（在太空）vs `in the space`（在空地） | `on earth`（究竟） |
-| 江河湖海与专有名词 | 国家缩写、江河、党派、传统节日 | `the USA`, `the UK`, `the Yellow River`, `the Yangtze River`, `the Mid-Autumn Festival`, `the Communist Party of China` |
-| 含 `Day` 的节日 | 节假日名称含 `Day` 时==不加== `the` | `Children's Day` |
+| 空间与固定短语对比 | `in space`（在太空）vs `in the space`（在空地） | `on ==the== earth`（在地球上）vs `on earth`（究竟，用于疑问词后） |
+| 江河国家与传统节日 | 国家缩写、江河、党派、含 `Festival` 的传统节日 | `the USA`, `the UK`, `the Yellow River`, `the Yangtze River`, `the Mid-Autumn Festival`, `the Communist Party of China` |
+| 含 `Day` 的节日 | 节假日名称以 `Day` 结尾时==不加== `the` | `Children's Day`, `National Day` |
 | 方位词 | 东南西北前加 `the` | `in the south of China` |
 | 乐器 | 西洋乐器前加 `the`；中文音译民乐==不加== `the` | `play ==the== violin` / `play ==erhu==` |
 | `the + 形容词` | 表示“一类人”（作主语谓语用复数） | `the poor`（穷人）, `the young`（年轻人） |

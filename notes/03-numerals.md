@@ -106,7 +106,7 @@ updated: 2026-11-19
 | 复合形容词 | `基数词 + 连字符 + ==单数名词==` | `a five-year-old girl`（一个 5 岁的女孩） |
 | 间隔表达 | `every + 基数词 + 复数` = `every + 序数词 + 单数` | `every two weeks` = `every second week`（每两周） |
 | 频率与倍数 | 一次 `once`，两次 `twice`，三次及以上 `基数词 + times` | `once a day`（一天一次）, `three times` |
-| `a number of` | 许多的 + 可数复数，谓语用==复数== | A number of students ==like== Xiao Zhan. |
+| `a number of` | 许多的 + 可数复数，谓语用==复数== | A number of students ==are== preparing for the exam. |
 | `the number of` | ……的数量 + 可数复数，谓语用==单数== | The number of the students ==is== twenty. |
 | `an / the amount of` | `an amount of`（大量）vs `the amount of`（……的量） | 后接==不可数名词== |
 

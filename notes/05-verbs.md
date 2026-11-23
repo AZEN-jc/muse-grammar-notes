@@ -147,16 +147,16 @@ updated: 2026-11-21
 
 | 用法 | 结构 | 含义 |
 | :--- | :--- | :--- |
-| 情态动词 | `dare do sth.` | 敢做某事 |
-| 情态动词 | `dare sb. to do sth.` | 敢让某人做某事 |
-| 实义动词 | `dare to do sth.` | 敢做某事 |
+| 情态动词 | `dare do sth.` | 敢做某事（多用于否定/疑问句） |
+| 实义动词 | `dare to do sth.` | 敢做某事（否定 `don't/doesn't dare (to) do`） |
+| 实义动词 | `dare sb. to do sth.` | 激某人做某事（敢让某人做某事） |
 
 #### 9. 情态动词表推测（核心考点）
 
 | 推测含义 | 常用结构 | 例句 |
 | :--- | :--- | :--- |
 | 一定是 | `must be` | — |
-| 可能是 | `may / might be` | `He may be sick. I can't be sure.` / `She told me that it may be true.` |
+| 可能是 | `may / might be` | `He may be sick. I can't be sure.` / `She told me that it ==might== be true.` |
 | 一定不 | `can't / couldn't be` | `He couldn't be Tom. Tom has gone to America.` |
 | 也许（副词） | `maybe + 句子` | `Maybe he is a student.` |
 
@@ -173,7 +173,7 @@ updated: 2026-11-21
 
 | 结构 | 含义 | 例句 |
 | :--- | :--- | :--- |
-| `情态动词 + be doing` | 对现在正在进行的动作的推测 | `He must be doing his homework now.`（待确认：字迹模糊，请核对） |
+| `情态动词 + be doing` | 对现在正在进行的动作的推测 | `He ==must be doing== his homework now.` |
 
 | 结构 | 含义 |
 | :--- | :--- |

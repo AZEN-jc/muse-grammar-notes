@@ -64,7 +64,7 @@ updated: 2026-11-20
 | `one` | 泛指上文提到的同类==单数可数==名词 | 同类不同物 | My cat needs a friend. I want to buy ==one==. |
 | `the one` | 特指上文 `the + 单数可数名词` | 同类不同物（特指） | The book bought yesterday is better than ==the one== borrowed from the library. |
 | `that` | 特指上文 `the + 单数可数/不可数名词` | 同类不同物（特指） | The population of SH is smaller than ==that== of ZZ. |
-| `those` | 特指上文 `the + 复数可数名词` | 同类不同物（特指） | The students in my class are superior to ==those== in your class. |
+| `those` | 特指上文 `the + 复数可数名词` | 同类不同物（特指） | The apples on this tree are bigger than ==those== on that tree. |
 
 > [!trap] 考试易错坑：`the one` 不能替代不可数名词
 > `the one` 只能替代 `the + 可数名词单数`，遇到不可数名词（如 `population`、`weather`、`water`）或抽象名词作比较时，必须用 ==that==，绝对不能用 `the one`。
@@ -113,14 +113,14 @@ updated: 2026-11-20
 
 | 词形 | 适用句型与含义 | 高频例句 |
 | :--- | :--- | :--- |
-| `some` | 肯定句“一些”；委婉请求/希望得到肯定回答的疑问句；表“某个” | `I have some story tickets.` / `Would you like some coffee?` / `Someone is knocking.` |
+| `some` | 肯定句“一些”；委婉请求/希望得到肯定回答的疑问句；表“某个” | `I have some story books.` / `Would you like some coffee?` / `Someone is knocking.` |
 | `any` | 否定/疑问句“一些”（接不可数或复数）；肯定句“==任一==”（接单数） | `I don't have any pens.` / `Do you have any pens?` |
 
 ### 相互代词与复合不定代词
 
 | 类别 | 核心词形 | 语法规则 / 固定搭配 |
 | :--- | :--- | :--- |
-| 相互代词 | `each other`, `one another` | 所有格：`each other's`, `one another's`；放动词后，==不作主语== |
+| 相互代词 | `each other`（传统指两者）, `one another`（三者以上） | 所有格：`each other's`, `one another's`；放动词后，==不作主语== |
 | 复合不定代词（物） | `something`, `anything`, `everything`, `nothing` | 作主语谓语用==单数==；`anything` 多用于否定/疑问句 |
 | 复合不定代词（人） | `someone/somebody`, `anyone/anybody`, `everyone/everybody`, `nobody` | 定语后置：`复合不定代词 + ==形容词==`（`something important`） |
 | 高频短语 | `anything but`（决不，根本不） / `nothing but`（只有，仅仅） | `The problem is anything but easy.` / `It is nothing but a joke.` |
@@ -172,3 +172,4 @@ updated: 2026-11-20
 > - 原稿 `I want buy one` 漏了不定式符号 `to`，已修正为 `I want to buy one`。
 > - 原稿 `My like is lost` 疑为 `bike` 笔误，正文已修正为 `My bike is lost`。
 > - 原稿 `He devote himself to teaching` 漏了第三人称单数 `-s`，正文已修正为 `He devotes himself to teaching`。
+> - 原稿 `I have some story tickets` 将 `story books` 与 `tickets` 混写，正文已修正为 `I have some story books`。

@@ -28,17 +28,17 @@ updated: 2026-11-19
 
 > [!mnemonic] 记忆口诀：f / fe 变 ves 的高频词
 > 妻子（wife）持刀（knife）去宰狼（wolf），小偷（thief）吓得发了慌；躲在架（shelf）后保己（self）命（life），半（half）片树叶（leaf）遮目光。
-> 特别注意直接加 `-s` 的例外：`roof → roofs`（屋顶）、`belief → beliefs`（信仰）。
+> 特别注意直接加 `-s` 的高频例外：`roof → ==roofs==`（屋顶）、`belief → ==beliefs==`（信仰）、`chief → ==chiefs==`（首领）、`proof → ==proofs==`（证据）、`cliff → cliffs`（悬崖）、`safe → safes`（保险箱）。
 
 #### 以 o 结尾的特殊变化
 
-| 词类 | 复数变化 | 高频例词 |
+| 词类规律 | 复数变化 | 高频例词 |
 | :--- | :--- | :--- |
-| 有生命（多加 `-es`） | 词尾加 ==-es== | hero → heroes, Negro → Negroes, volcano → volcanoes, potato → potatoes, tomato → tomatoes |
-| 无生命或外来词（多加 `-s`） | 词尾加 ==-s== | photo → photos, radio → radios, piano → pianos（例外：echo → echoes） |
+| 辅音字母 + `o`（少数高频词加 `-es`） | 词尾加 ==-es== | hero → heroes, potato → potatoes, tomato → tomatoes, echo → echoes, volcano → volcanoes（或 volcanos） |
+| 其余辅音 / 元音字母 + `o`（绝大多数） | 词尾加 ==-s== | photo → photos, radio → radios, piano → pianos, zoo → zoos, video → videos, bamboo → bamboos |
 
 > [!mnemonic] 记忆口诀：以 o 结尾加 -es 的高频词
-> 黑人（Negro）英雄（hero）生在火山（volcano），听着回音（echo）吃土豆（potato）西红柿（tomato）。
+> 英雄（hero）在火山（volcano）听着回音（echo）吃土豆（potato）和西红柿（tomato）。
 
 ### 不规则变化与特殊复数
 
@@ -49,11 +49,11 @@ updated: 2026-11-19
 | 特殊词形变化 | 特殊词尾或词根变化 | ox → oxen（公牛）, mouse → mice, child → children |
 | 外来学术名词 | 词尾 `-um/-on → -a` | medium → media, datum → data, criterion → criteria, phenomenon → phenomena, bacterium → bacteria |
 | 一词多义（chicken） | 小鸡可数；鸡肉不可数 | two chickens（两只小鸡）/ some chicken（一些鸡肉） |
-| 一词多义（people） | 人们为集合复数；民族可加 `-s` | many people（许多人）/ fifty-six ==peoples==（56个民族）；一个人用 `a person` |
+| 一词多义（people） | 人们为集合复数；民族为可数名词 | many people（许多人）/ a ==people==（一个民族）→ fifty-six ==peoples==（56个民族）；一个人用 `a person` |
 
-> [!trap] 考试易错坑：fish 与 people 的数
-> - `fish` 表“鱼的条数”时单复数同形；表“鱼肉”时不可数；表“鱼的种类”时复数加 ==-es==（`fishes`）。
-> - `people` 表“人们”时本身就是复数，不能说 ❌ `a people`（表示“一个人”必须用 ✅ `a person`）。
+> [!trap] 考试易错坑：fish 与 people 的数与语境
+> - `fish` 表“鱼的条数”时**日常与绝大多数考题均单复数同形**（`three fish`）；表“鱼肉”时不可数；仅在生物学或明确强调“**不同种类的鱼**（different species of fish）”时复数才加 ==-es==（`fishes`）。
+> - `people` 表“人们”时本身就是集合复数，表示“一个人”必须用 ✅ `a person`（不能用 `a people` 表一个人）；但当 `people` 表**“民族 / 族群”**时是规则可数名词，**可以说 ✅ `a people`（一个民族）**，复数为 `peoples`。
 
 #### 某国人变复数规则
 
@@ -93,15 +93,15 @@ updated: 2026-11-19
 > - ✅ He gave me **a piece of advice** on English learning.
 > - 感叹句：`What ==fun== it is!`（`fun` 不可数，不能加 `a`）
 
-| 既可数又不可数名词 | 不可数含义 | 可数含义 |
-| :--- | :--- | :--- |
-| `paper` | 纸张 | 报纸；试卷（a paper） |
-| `time` | 时间 | 次数；倍数；时代（three times） |
-| `wood` | 木头；木材 | 森林（woods） |
-| `room` | 空间；余地 | 房间（rooms） |
-| `work` | 工作 | 作品；著作（works） |
-| `exercise` | 锻炼；运动 | 练习题；体操（morning exercises） |
-| `experience` | 经验 | 经历（an unforgettable experience） |
+| 既可数又不可数名词 | 不可数含义（物质/抽象） | 可数含义（个体/具体化） | 典型语境对比 |
+| :--- | :--- | :--- | :--- |
+| `paper` | 纸张 | 报纸；试卷；论文（a paper） | `some paper`（一些纸）/ `read a morning paper`（看晨报） |
+| `time` | 时间 | 次数；倍数；时代（times） | `much time`（很多时间）/ `three ==times==`（三次）、`in modern times`（在现代） |
+| `work` | 工作（日常劳动） | 著作；作品；工厂（works） | `hard ==work==`（辛勤的工作）/ `Shakespeare's ==works==`（莎士比亚著作） |
+| `wood` | 木头；木材 | 树林；森林（常作 woods） | `a piece of wood`（一块木头）/ `walk in the ==woods==`（在树林散步） |
+| `room` | 空间；余地 | 房间（rooms） | `make ==room== for`（为……腾出空间）/ `two rooms`（两个房间） |
+| `exercise` | 锻炼；运动（泛指） | 练习题；体操（exercises） | `take more exercise`（多锻炼）/ `do eye ==exercises==`（做眼保健操） |
+| `experience` | 经验 | 经历（an experience） | `rich ==experience==`（丰富经验）/ `an unforgettable ==experience==`（难忘经历） |
 
 ### 量词结构与数量修饰语
 
@@ -121,9 +121,20 @@ updated: 2026-11-19
 
 | 修饰对象 | 高频数量修饰语 | 核心注意 |
 | :--- | :--- | :--- |
-| 只修饰==可数名词== | `many`, `few`, `a few`, `many a`, `a great many`, `quite a few`, `a (great/large) number of`, `numbers of` | `many a` 后接==单数==名词，谓语用单数；`a number of` 谓语用复数 |
-| 只修饰==不可数名词== | `much`, `little`, `a little`, `a great deal of`, `a large amount of`, `amounts of`, `a sum of`, `quite a little` | `a large amount of` + 不可数名词作主语时，谓语用==单数==；`amounts of` 用复数 |
-| 可数 / 不可数均可 | `some`, `any`, `a lot of`, `lots of`, `plenty of`, `a large quantity of`, `quantities of`, `a variety of` | `a variety of` 谓语随名词；`varieties of` / `quantities of` 谓语多用==复数== |
+| 只修饰==可数名词== | `many`, `few`, `a few`, `many a`, `a great many`, `quite a few`, `a (great/large) number of`, `numbers of` | `many a + 单数名词` 谓语用==单数==；`a number of` 谓语用==复数== |
+| 只修饰==不可数名词== | `much`, `little`, `a little`, `a great deal of`, `a large amount of`, `amounts of`, `a sum of`, `quite a little` | `a large amount of + 不可数` 谓语用==单数==；`amounts of` 谓语用==复数== |
+| 可数 / 不可数均可 | `some`, `any`, `a lot of`, `lots of`, `plenty of`, `a large quantity of`, `quantities of`, `a variety of` | `a quantity of` 谓语随名词；`quantities of` 谓语一律用==复数== |
+
+> [!trap] 考试易错坑：数量修饰语三大高频辨析
+> 1. **`a number of` vs `the number of`**：
+>    - `==a== number of + 复数名词`（许多……）→ 中心词是复数名词，谓语动词用**==复数==**。
+>    - `==the== number of + 复数名词`（……的数量）→ 中心词是 `number`，谓语动词用**==单数==**。
+> 2. **`a quantity of` vs `quantities of` 主谓一致**：
+>    - `a (large) quantity of + 名词` 作主语，谓语单复数**看 `of` 后面的名词**（接复数名词用复数，接不可数名词用单数）。
+>    - `==quantities== of + 名词`（无论后接可数还是不可数）作主语，谓语动词一律用**==复数==**。
+> 3. **`few / a few / little / a little` 四宫格**：
+>    - **有 `a` 表肯定（有一点）**：`==a few== + 可数复数`、`==a little== + 不可数`（注意 `quite a few` = 相当多）。
+>    - **无 `a` 表否定（几乎没有）**：`==few== + 可数复数`、`==little== + 不可数`。
 
 ## 名词所有格
 
@@ -138,12 +149,12 @@ updated: 2026-11-19
 
 示例：`Tom's book`, `the girls' bags`, `Women's Day`, `Tom and Jim's room`（共有）, `Tom's and Jim's rooms`（各自所有）, `at Tom's`（在汤姆家）。
 
-| 特殊适用类别 | 示例 | 复合形容词转换 |
+| 特殊适用类别 | 地道示例 | 复合形容词 / of 转换 |
 | :--- | :--- | :--- |
 | 时间 | `two weeks' time`（两周的时间） | `a five-minute walk` = `five minutes' walk` |
-| 距离 | `five hundred meters' distance`（五百米的距离） | `a 500-meter distance` |
-| 国家 / 城市 | `China's capital`, `Changchun's industry` | — |
-| 金钱 / 价值 | `thirty dollars' value`（三十美元的价值） | — |
+| 距离 | `five minutes' walk`（五分钟路程） | `a distance of 500 meters` / `a 500-meter distance` |
+| 国家 / 城市 | `China's capital`, `Changchun's industry` | `the capital of China` |
+| 金钱 / 价值 | `thirty dollars' worth`（三十美元的价值） | — |
 
 ### `of` 所有格与特殊介词 `to`
 
@@ -182,7 +193,7 @@ updated: 2026-11-19
 | be busy doing sth. | 忙于做某事 | He is busy preparing for the exam. |
 | take medicine | 吃药 | Take this medicine three times a day. |
 | in one's opinion / view | 在某人看来 | In my opinion, discussion is a good solution to the problem. |
-| as far as sb. is concerned | 就某人而言 | As far as I am concerned, it's a great habit of getting up early. |
+| as far as sb. is concerned | 就某人而言 | As far as I am concerned, it's a great habit ==to get up== early. |
 
 > [!errata] 原稿勘误
 > - 原稿 `do eyes exercises` 笔误，做眼保健操应为 `do eye exercises`（`eye` 作定语用单数），正文已修正。

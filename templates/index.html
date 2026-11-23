@@ -1604,6 +1604,18 @@
         </div>
       </section>
 
+      <!-- 🔥 Spaced-Repetition Mistake & Forgetting Tracker (1 / 3 / 7 Days) -->
+      <section class="starred-sec" id="mistakesSection">
+        <div class="sec-head" style="margin-bottom:12px; align-items:center;">
+          <div>
+            <h2 class="sec-title">🔥 错题与遗忘追踪本 · 1 / 3 / 7 天艾宾浩斯复习</h2>
+            <span class="sec-meta" id="mistakesCount">0 DUE TODAY</span>
+          </div>
+          <button class="chip chip-obsidian" id="startMistakeQuizBtn" type="button">🎯 开始错题专练</button>
+        </div>
+        <div class="starred-grid" id="mistakesGrid"></div>
+      </section>
+
       <!-- ★ Starred Weak Points Quick Review -->
       <section class="starred-sec" id="starredSection">
         <div class="sec-head" style="margin-bottom:12px;">
@@ -1683,7 +1695,7 @@
     </div>
   </div>
 
-  <!-- Random Cloze Quiz Modal -->
+  <!-- Random Cloze & Mistake Review Quiz Modal -->
   <div class="modal-backdrop" id="quizModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
       <div class="modal-head">
@@ -1697,9 +1709,10 @@
       <div class="quiz-stage" id="quizStage"></div>
       <div class="quiz-actions">
         <a class="chip" id="quizJumpLink" href="index.html">查看原专题 →</a>
-        <div style="display:flex; gap:8px;">
-          <button class="chip" id="quizRevealBtn" type="button">揭晓答案</button>
-          <button class="chip chip-obsidian" id="quizNextBtn" type="button">换一题 →</button>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="chip" id="quizRevealBtn" type="button">👁️ 揭晓答案</button>
+          <button class="chip" id="quizWrongBtn" type="button" title="记入错题追踪本，按 1/3/7 天间隔安排复习">✗ 没记住</button>
+          <button class="chip chip-obsidian" id="quizRightBtn" type="button" title="推进复习阶段并切下一题">✓ 记住了 →</button>
         </div>
       </div>
     </div>
@@ -1920,35 +1933,196 @@
       showToast(`已更新目标考试日期：${input.trim()}`);
     });
 
-    // Random Cloze Quiz Modal
+    // Spaced-Repetition Mistake & Forgetting Tracker (1 / 3 / 7 Days) + Active Recall Quiz
+    const STAGE_INTERVAL_DAYS = [0, 1, 3, 7];
+    const STAGE_LABELS = ['今日待复习', '1天后复查', '3天后复查', '7天后复查'];
+
+    function getMistakes() {
+      const data = readJsonStorage('muse-grammar-mistakes', {});
+      return Array.isArray(data) ? {} : data;
+    }
+
+    function saveMistakes(mistakes) {
+      try {
+        localStorage.setItem('muse-grammar-mistakes', JSON.stringify(mistakes));
+      } catch {}
+    }
+
+    function addDaysIso(days) {
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      d.setDate(d.getDate() + days);
+      return formatLocalDate(d);
+    }
+
+    function isMistakeDue(item, todayIso) {
+      if (!item || typeof item !== 'object') return false;
+      if (!item.nextReviewDate) return true;
+      return item.nextReviewDate <= todayIso;
+    }
+
+    function recordMistakeCard(card) {
+      if (!card || !card.cardId) return;
+      const mistakes = getMistakes();
+      const prev = mistakes[card.cardId];
+      const today = formatLocalDate(new Date());
+      mistakes[card.cardId] = {
+        cardId: card.cardId,
+        topicId: card.topicId,
+        topicTitle: card.topicTitle,
+        heading: card.heading,
+        slug: card.slug || '',
+        parts: card.parts || [],
+        wrongCount: (Number(prev?.wrongCount) || 0) + 1,
+        stage: 0,
+        nextReviewDate: today,
+        lastDate: today,
+      };
+      saveMistakes(mistakes);
+      renderMistakes();
+    }
+
+    function advanceMistakeCard(card) {
+      if (!card || !card.cardId) return false;
+      const mistakes = getMistakes();
+      const prev = mistakes[card.cardId];
+      if (!prev) return false;
+      const nextStage = (Number(prev.stage) || 0) + 1;
+      if (nextStage >= STAGE_INTERVAL_DAYS.length) {
+        delete mistakes[card.cardId];
+        saveMistakes(mistakes);
+        renderMistakes();
+        showToast('🎉 已完成 1/3/7 天全部轮次，彻底攻克该错题！');
+        return true;
+      }
+      const interval = STAGE_INTERVAL_DAYS[nextStage];
+      mistakes[card.cardId] = {
+        ...prev,
+        stage: nextStage,
+        nextReviewDate: addDaysIso(interval),
+        lastDate: formatLocalDate(new Date()),
+      };
+      saveMistakes(mistakes);
+      renderMistakes();
+      showToast(`✓ 已进入「${STAGE_LABELS[nextStage]}」阶段`);
+      return true;
+    }
+
+    function renderMistakes() {
+      const sec = document.getElementById('mistakesSection');
+      const grid = document.getElementById('mistakesGrid');
+      const countEl = document.getElementById('mistakesCount');
+      const startBtn = document.getElementById('startMistakeQuizBtn');
+      const mistakes = Object.values(getMistakes()).filter(
+        (m) => m && typeof m === 'object' && m.cardId && m.topicId
+      );
+
+      if (!mistakes.length) {
+        sec.classList.remove('visible');
+        grid.innerHTML = '';
+        countEl.textContent = '0 DUE TODAY';
+        return;
+      }
+
+      const today = formatLocalDate(new Date());
+      mistakes.sort((a, b) => {
+        const dueA = isMistakeDue(a, today) ? 0 : 1;
+        const dueB = isMistakeDue(b, today) ? 0 : 1;
+        if (dueA !== dueB) return dueA - dueB;
+        return (b.wrongCount || 0) - (a.wrongCount || 0);
+      });
+
+      const dueCount = mistakes.filter((m) => isMistakeDue(m, today)).length;
+      sec.classList.add('visible');
+      countEl.textContent = `${dueCount} 今日待复习 · 共 ${mistakes.length} 题追踪中`;
+      startBtn.textContent = dueCount > 0 ? `🎯 专练今日到期 (${dueCount})` : `🎯 抽背全部错题 (${mistakes.length})`;
+
+      grid.innerHTML = '';
+      mistakes.slice(0, 12).forEach((item) => {
+        const due = isMistakeDue(item, today);
+        const stageLbl = due ? '🔥 今日待复习' : `${STAGE_LABELS[item.stage] || '待复查'} (${item.nextReviewDate})`;
+        const previewText = (item.parts || [])
+          .map((p) => (p.isCloze ? `【${p.text}】` : p.text))
+          .join('')
+          .slice(0, 72);
+
+        const card = document.createElement('div');
+        card.className = 'starred-card';
+        const href = item.slug ? `${item.topicId}.html#${encodeURIComponent(item.slug)}` : `${item.topicId}.html`;
+        card.innerHTML = `
+          <a class="starred-link" href="${escapeHtml(href)}">
+            <span class="starred-topic">${escapeHtml(item.topicTitle)} · ${escapeHtml(stageLbl)} · 错 ${Number(item.wrongCount) || 1} 次</span>
+            <span class="starred-title">${escapeHtml(previewText)}</span>
+          </a>
+          <button class="starred-remove" type="button" title="已彻底掌握，移出错题本" aria-label="移出错题本">✓</button>
+        `;
+        card.querySelector('.starred-remove').addEventListener('click', () => {
+          const all = getMistakes();
+          delete all[item.cardId];
+          saveMistakes(all);
+          renderMistakes();
+          showToast('已将该考点标记为彻底掌握');
+        });
+        grid.appendChild(card);
+      });
+    }
+
     const quizModal = document.getElementById('quizModal');
+    const quizModalTitle = document.getElementById('quizModalTitle');
     const quizStage = document.getElementById('quizStage');
     const quizSource = document.getElementById('quizSource');
     const quizCounter = document.getElementById('quizCounter');
     const quizJumpLink = document.getElementById('quizJumpLink');
-    let quizOrder = [];
+    let activeQuizDeck = [];
     let quizIdx = 0;
+    let quizMode = 'random';
 
-    function shuffleQuiz() {
-      quizOrder = CLOZE_DECK.map((_, idx) => idx);
-      for (let i = quizOrder.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [quizOrder[i], quizOrder[j]] = [quizOrder[j], quizOrder[i]];
+    function buildQuizDeck(mode) {
+      quizMode = mode;
+      if (mode === 'mistakes') {
+        const today = formatLocalDate(new Date());
+        const all = Object.values(getMistakes()).filter((m) => m && m.cardId && Array.isArray(m.parts));
+        const due = all.filter((m) => isMistakeDue(m, today));
+        activeQuizDeck = (due.length ? due : all).slice();
+        quizModalTitle.textContent = due.length ? `🎯 今日到期错题专练 (${due.length})` : `🎯 错题本巩固专练 (${all.length})`;
+      } else {
+        activeQuizDeck = CLOZE_DECK.slice();
+        for (let i = activeQuizDeck.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [activeQuizDeck[i], activeQuizDeck[j]] = [activeQuizDeck[j], activeQuizDeck[i]];
+        }
+        quizModalTitle.textContent = '🎲 随机抽背一题';
       }
       quizIdx = 0;
     }
 
+    function getCurrentQuizCard() {
+      if (!activeQuizDeck.length) return null;
+      return activeQuizDeck[quizIdx % activeQuizDeck.length];
+    }
+
     function renderQuizCard() {
-      if (!CLOZE_DECK.length) {
-        quizSource.textContent = '暂无挖空题库';
+      if (!activeQuizDeck.length) {
+        quizSource.textContent = quizMode === 'mistakes' ? '🎉 错题本已全部清空' : '暂无挖空题库';
         quizCounter.textContent = '0 / 0';
-        quizStage.textContent = '请先在 notes/*.md 中使用 ==关键词== 标记考点。';
+        quizStage.textContent = quizMode === 'mistakes'
+          ? '太棒了！当前没有待复习的错题，可以切换到全库随机抽背继续巩固。'
+          : '请先在 notes/*.md 中使用 ==关键词== 标记考点。';
         return;
       }
-      if (!quizOrder.length || quizIdx >= quizOrder.length) shuffleQuiz();
-      const card = CLOZE_DECK[quizOrder[quizIdx]];
-      quizSource.textContent = `${card.topicTitle} · ${card.heading}`;
-      quizCounter.textContent = `${quizIdx + 1} / ${CLOZE_DECK.length}`;
+      if (quizIdx >= activeQuizDeck.length) {
+        if (quizMode === 'mistakes') {
+          showToast('🎉 本轮错题专练已完成！');
+          closeQuizModal();
+          return;
+        }
+        buildQuizDeck('random');
+      }
+      const card = getCurrentQuizCard();
+      const mistakeInfo = getMistakes()[card.cardId];
+      const badge = mistakeInfo ? ` · 🔥 错 ${mistakeInfo.wrongCount} 次 (${STAGE_LABELS[mistakeInfo.stage] || '待复习'})` : '';
+      quizSource.textContent = `${card.topicTitle} · ${card.heading}${badge}`;
+      quizCounter.textContent = `${quizIdx + 1} / ${activeQuizDeck.length}`;
       quizJumpLink.href = card.slug ? `${card.topicId}.html#${encodeURIComponent(card.slug)}` : `${card.topicId}.html`;
 
       quizStage.innerHTML = (card.parts || [])
@@ -1959,8 +2133,8 @@
         .join('');
     }
 
-    function openQuizModal() {
-      if (!quizOrder.length) shuffleQuiz();
+    function openQuizModal(mode = 'random') {
+      buildQuizDeck(mode);
       renderQuizCard();
       quizModal.classList.add('open');
       quizModal.setAttribute('aria-hidden', 'false');
@@ -1970,7 +2144,8 @@
       quizModal.setAttribute('aria-hidden', 'true');
     }
 
-    document.getElementById('openRandomQuiz').addEventListener('click', openQuizModal);
+    document.getElementById('openRandomQuiz').addEventListener('click', () => openQuizModal('random'));
+    document.getElementById('startMistakeQuizBtn').addEventListener('click', () => openQuizModal('mistakes'));
     document.getElementById('closeQuizModal').addEventListener('click', closeQuizModal);
     quizModal.addEventListener('click', (e) => { if (e.target === quizModal) closeQuizModal(); });
     quizStage.addEventListener('click', (e) => {
@@ -1981,10 +2156,22 @@
     document.getElementById('quizRevealBtn').addEventListener('click', () => {
       quizStage.querySelectorAll('.quiz-blank').forEach((b) => { b.dataset.revealed = 'true'; });
     });
-    document.getElementById('quizNextBtn').addEventListener('click', () => {
+    document.getElementById('quizWrongBtn').addEventListener('click', () => {
+      const card = getCurrentQuizCard();
+      if (card) {
+        recordMistakeCard(card);
+        showToast('✗ 已记入错题追踪本（按 1/3/7 天间隔安排复习）');
+      }
       quizIdx += 1;
       renderQuizCard();
     });
+    document.getElementById('quizRightBtn').addEventListener('click', () => {
+      const card = getCurrentQuizCard();
+      if (card) advanceMistakeCard(card);
+      quizIdx += 1;
+      renderQuizCard();
+    });
+    renderMistakes();
 
     // Sticky Topbar hairline on scroll
     const stickyTop = document.getElementById('stickyTop');
@@ -2503,19 +2690,20 @@
       }
     });
 
-    // Keep review badges, spine progress, energy card, and starred items in sync
+    // Keep review badges, spine progress, energy card, mistakes, and starred items in sync
     function refreshStudyState() {
       if (!userPinnedProgressMode && getReviewedTopicCount() > 0 && progressMode === 'built') {
         progressMode = 'reviewed';
       }
       syncProgressRuler();
       renderEnergyCard();
+      renderMistakes();
       renderStarred();
       renderGrid();
     }
     window.addEventListener('pageshow', refreshStudyState);
     window.addEventListener('storage', (e) => {
-      if (e.key === 'muse-grammar-reviews' || e.key === 'muse-grammar-stars' || e.key === 'muse-grammar-exam-date') {
+      if (e.key === 'muse-grammar-reviews' || e.key === 'muse-grammar-stars' || e.key === 'muse-grammar-mistakes' || e.key === 'muse-grammar-exam-date') {
         refreshStudyState();
       }
     });

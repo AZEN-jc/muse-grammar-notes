@@ -606,6 +606,46 @@
       color: var(--ink);
       box-shadow: inset 0 0 0 1px var(--ink);
     }
+    .related-strip {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .related-pill {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--ink) 5%, transparent);
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: background-color 0.14s, color 0.14s;
+    }
+    .related-pill:hover {
+      background: var(--ink);
+      color: var(--on-ink);
+    }
+
+    /* Deep Cloze Mode (masks rule explanations & trap/formula lines) */
+    .cloze-active.cloze-deep .deep-cloze-span:not([data-revealed="true"]) {
+      background: var(--surface);
+      color: var(--ink);
+      filter: blur(5.5px);
+      cursor: pointer;
+      user-select: none;
+      border-radius: 4px;
+      padding: 0 4px;
+      box-shadow: inset 0 0 0 1px var(--line-strong);
+      transition: filter 0.2s ease;
+    }
+    .cloze-active.cloze-deep .deep-cloze-span[data-revealed="true"] {
+      filter: blur(0);
+      cursor: pointer;
+    }
 
     /* Cloze Toolbar Banner */
     .cloze-banner {
@@ -1372,11 +1412,15 @@
             </div>
             <p class="doc-summary">{{SUMMARY}}</p>
             <div class="hero-toc" id="heroToc" aria-label="本页章节目录"></div>
+            <div class="related-strip" aria-label="跨专题知识串联">
+              {{RELATED_LINKS_HTML}}
+            </div>
           </div>
 
           <div class="cloze-banner" id="clozeBanner">
-            <span><strong>背诵自测已开启</strong>：点击模糊词或表格单元格揭晓（已揭晓 <strong id="revealedStat">0</strong> 处）</span>
-            <div style="display:flex; gap:6px;">
+            <span><strong>背诵自测已开启</strong>：点击遮罩揭晓，没记住可一键加入错题本（已揭晓 <strong id="revealedStat">0</strong> 处）</span>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="chip" id="deepClozeBtn" type="button" title="连同核心规则与例句一起遮罩">深度档：遮规则与例句</button>
               <button class="chip" id="revealAllBtn" type="button">全部揭晓</button>
               <button class="chip" id="resetClozeBtn" type="button">重置遮罩</button>
             </div>
@@ -1572,8 +1616,83 @@
       resizer.addEventListener('pointercancel', onUp);
     });
 
-    // Cloze mode with Physics Stretch Switch
+    // Two-tier Cloze Mode (Standard vs Deep Recall) + Mistake Capture
+    (function initDeepClozeSpans() {
+      docContent.querySelectorAll('li').forEach((li) => {
+        if (li.closest('.callout-errata')) return;
+        const firstStrong = li.querySelector(':scope > strong:first-child');
+        if (firstStrong && firstStrong.nextSibling) {
+          const span = document.createElement('span');
+          span.className = 'deep-cloze-span';
+          let node = firstStrong.nextSibling;
+          while (node) {
+            const next = node.nextSibling;
+            span.appendChild(node);
+            node = next;
+          }
+          if (span.textContent.trim()) li.appendChild(span);
+        }
+      });
+    })();
+
+    function findNearestHeading(el) {
+      let cur = el;
+      while (cur && cur !== docContent) {
+        let prev = cur.previousElementSibling;
+        while (prev) {
+          if (/^H[23]$/.test(prev.tagName) && prev.id) {
+            const clone = prev.cloneNode(true);
+            clone.querySelectorAll('.heading-anchor, .heading-star').forEach((n) => n.remove());
+            return { slug: prev.id, heading: clone.textContent.trim() };
+          }
+          prev = prev.previousElementSibling;
+        }
+        cur = cur.parentElement;
+      }
+      return { slug: '', heading: TOPIC_TITLE };
+    }
+
+    function captureInPageMistake(targetEl, answerText) {
+      const { slug, heading } = findNearestHeading(targetEl);
+      const container = targetEl.closest('tr, li, p') || targetEl;
+      const fullText = container.textContent.replace(/\s+/g, ' ').trim().slice(0, 96);
+      const ans = (answerText || targetEl.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 48);
+      const cardId = `${TOPIC_ID}::${slug || 'root'}::${ans || fullText.slice(0, 24)}`;
+      const parts = [];
+      const idx = ans ? fullText.indexOf(ans) : -1;
+      if (idx !== -1 && ans) {
+        if (idx > 0) parts.push({ text: fullText.slice(0, idx), isCloze: false });
+        parts.push({ text: ans, isCloze: true });
+        if (idx + ans.length < fullText.length) parts.push({ text: fullText.slice(idx + ans.length), isCloze: false });
+      } else {
+        parts.push({ text: fullText, isCloze: true });
+      }
+
+      try {
+        const raw = localStorage.getItem('muse-grammar-mistakes');
+        const parsed = raw ? JSON.parse(raw) : {};
+        const mistakes = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+        const prev = mistakes[cardId];
+        const today = getTodayIso();
+        mistakes[cardId] = {
+          cardId,
+          topicId: TOPIC_ID,
+          topicTitle: TOPIC_TITLE,
+          heading,
+          slug,
+          parts,
+          wrongCount: (Number(prev?.wrongCount) || 0) + 1,
+          stage: 0,
+          nextReviewDate: today,
+          lastDate: today,
+        };
+        localStorage.setItem('muse-grammar-mistakes', JSON.stringify(mistakes));
+        showToast('🔥 已记入首页「错题与遗忘追踪本」（按 1/3/7 天复习）');
+      } catch {}
+    }
+
     const clozeToggle = document.getElementById('clozeToggle');
+    const deepClozeBtn = document.getElementById('deepClozeBtn');
     function updateRevealedCount() {
       const count = docContent.querySelectorAll('[data-revealed="true"]').length;
       const el = document.getElementById('revealedStat');
@@ -1583,6 +1702,8 @@
       document.body.classList.toggle('cloze-active', enabled);
       clozeToggle.classList.toggle('active', enabled);
       if (!enabled) {
+        document.body.classList.remove('cloze-deep');
+        deepClozeBtn?.classList.remove('active');
         docContent.querySelectorAll('[data-revealed]').forEach((el) => el.removeAttribute('data-revealed'));
       }
       updateRevealedCount();
@@ -1590,6 +1711,20 @@
     clozeToggle.addEventListener('click', () => {
       setClozeMode(!document.body.classList.contains('cloze-active'));
     });
+    deepClozeBtn?.addEventListener('click', () => {
+      const next = !document.body.classList.contains('cloze-deep');
+      document.body.classList.toggle('cloze-deep', next);
+      deepClozeBtn.classList.toggle('active', next);
+      showToast(next ? '已开启深度回忆档：核心规则与结论已一并遮罩' : '已切回标准档：仅遮罩词眼与表格');
+    });
+
+    function promptMistakeOnReveal(el) {
+      const ans = el.textContent?.trim() || '';
+      showToast('已揭晓考点', {
+        label: '✗ 没记住 · 入错题本',
+        onClick: () => captureInPageMistake(el, ans),
+      });
+    }
 
     docContent.addEventListener('click', (e) => {
       if (!document.body.classList.contains('cloze-active')) return;
@@ -1597,6 +1732,7 @@
       if (td && td.getAttribute('data-revealed') !== 'true') {
         td.setAttribute('data-revealed', 'true');
         updateRevealedCount();
+        promptMistakeOnReveal(td);
         return;
       }
       const mark = e.target.closest('mark.cloze-mark');
@@ -1604,7 +1740,18 @@
         const revealed = mark.getAttribute('data-revealed') === 'true';
         mark.setAttribute('data-revealed', revealed ? 'false' : 'true');
         updateRevealedCount();
+        if (!revealed) promptMistakeOnReveal(mark);
         return;
+      }
+      if (document.body.classList.contains('cloze-deep')) {
+        const deepSpan = e.target.closest('.deep-cloze-span');
+        if (deepSpan) {
+          const revealed = deepSpan.getAttribute('data-revealed') === 'true';
+          deepSpan.setAttribute('data-revealed', revealed ? 'false' : 'true');
+          updateRevealedCount();
+          if (!revealed) promptMistakeOnReveal(deepSpan);
+          return;
+        }
       }
       if (td) {
         const revealed = td.getAttribute('data-revealed') === 'true';
@@ -1629,7 +1776,7 @@
     });
 
     document.getElementById('revealAllBtn').addEventListener('click', () => {
-      docContent.querySelectorAll('mark.cloze-mark, td:not(:first-child)').forEach((el) => {
+      docContent.querySelectorAll('mark.cloze-mark, td:not(:first-child), .deep-cloze-span').forEach((el) => {
         el.setAttribute('data-revealed', 'true');
       });
       updateRevealedCount();

@@ -266,6 +266,7 @@ export function extractClozeCards(raw, { id, title, order }) {
 
     if (parts.some((p) => p.isCloze)) {
       cards.push({
+        cardId: `${id}::${currentSlug || 'root'}::${cards.length}`,
         topicId: id,
         topicTitle: title,
         order,
@@ -352,6 +353,7 @@ export function buildAll(rootDir = ROOT_DIR) {
         whyCount: built?.whyCount || 0,
         trapCount: built?.trapCount || 0,
         previewSections: built?.previewSections || (topic.sections || []).slice(0, 3),
+        related: Array.isArray(topic.related) ? topic.related : [],
       };
     });
 
@@ -378,6 +380,10 @@ export function buildAll(rootDir = ROOT_DIR) {
       })
       .join('\n          ');
 
+    const relatedLinksHtml = (topic.related || [])
+      .map((rel) => `<a class="related-pill" href="${escapeHtml(rel.href)}">🔗 ${escapeHtml(rel.label)}</a>`)
+      .join('\n              ');
+
     const chapterHtml = injectTemplate(chapterTemplate, {
       TOPIC_ID: escapeHtml(topic.id),
       TOPIC_ID_JSON: safeJsonForScript(topic.id),
@@ -389,6 +395,7 @@ export function buildAll(rootDir = ROOT_DIR) {
       CLOZE_COUNT: note.clozeCount,
       WHY_COUNT: note.whyCount,
       TOPIC_PILLS: pillsHtml,
+      RELATED_LINKS_HTML: relatedLinksHtml,
       TOPICS_JSON: safeJsonForScript(mergedTopics),
       CONTENT_HTML: note.html,
       MINDMAP_JSON: safeJsonForScript(note.mindmapMd),

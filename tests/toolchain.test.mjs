@@ -474,3 +474,59 @@ updated: 2026-11-21
   assert.match(chapterHtml, /function undoTodayReview\(\)/);
   assert.doesNotMatch(chapterHtml, /\{\{[A-Z_]+\}\}/);
 });
+
+test('Phase 1 grammar accuracy revisions and SKILL.md rules are enforced across notes', () => {
+  const nouns = fs.readFileSync(path.join(ROOT_DIR, 'notes', '01-nouns.md'), 'utf8');
+  assert.doesNotMatch(nouns, /Negro/i, 'Outdated/offensive example word must be removed');
+  assert.match(nouns, /一个民族/);
+  assert.match(nouns, /chiefs/);
+  assert.match(nouns, /quantities== of/);
+  assert.match(nouns, /a distance of 500 meters/);
+  assert.match(nouns, /habit ==to get up== early/);
+
+  const pronouns = fs.readFileSync(path.join(ROOT_DIR, 'notes', '02-pronouns.md'), 'utf8');
+  assert.match(pronouns, /I have some story books\./);
+
+  const verbs = fs.readFileSync(path.join(ROOT_DIR, 'notes', '05-verbs.md'), 'utf8');
+  assert.match(verbs, /\| 实义动词 \| `dare sb\. to do sth\.`/);
+  assert.match(verbs, /She told me that it ==might== be true\./);
+
+  const skill = fs.readFileSync(path.join(ROOT_DIR, 'SKILL.md'), 'utf8');
+  assert.match(skill, /严守手写原稿进度边界/);
+});
+
+test('Phase 2 & 3: spaced-repetition mistake tracker, deep cloze, and cross-topic related links have zero dead targets', () => {
+  const res = buildAll(ROOT_DIR);
+  const indexHtml = fs.readFileSync(path.join(res.distDir, 'index.html'), 'utf8');
+  for (const id of ['mistakesSection', 'startMistakeQuizBtn', 'quizWrongBtn', 'quizRightBtn']) {
+    assert.ok(indexHtml.includes(`id="${id}"`), `Missing #${id} in dist/index.html`);
+  }
+  assert.match(indexHtml, /STAGE_INTERVAL_DAYS = \[0, 1, 3, 7\]/);
+
+  const deckMatch = indexHtml.match(/const CLOZE_DECK = (\[.*\]);/);
+  assert.ok(deckMatch, 'Expected CLOZE_DECK in dist/index.html');
+  const deck = JSON.parse(deckMatch[1]);
+  assert.ok(deck.every((c) => typeof c.cardId === 'string' && c.cardId.includes('::')));
+
+  // Verify every cross-topic related link in schema/topics.json resolves to a real file and heading id
+  const { topics } = loadTopicsSchema(ROOT_DIR);
+  for (const topic of topics) {
+    const chHtml = fs.readFileSync(path.join(res.distDir, `${topic.id}.html`), 'utf8');
+    assert.match(chHtml, /id="deepClozeBtn"/);
+    assert.match(chHtml, /function captureInPageMistake/);
+    assert.match(chHtml, /class="related-pill"/);
+
+    for (const rel of topic.related || []) {
+      const [filePart, hashPart] = rel.href.split('#');
+      const targetPath = path.join(res.distDir, filePart);
+      assert.ok(fs.existsSync(targetPath), `Missing related target file ${filePart} from ${topic.id}`);
+      if (hashPart) {
+        const targetHtml = fs.readFileSync(targetPath, 'utf8');
+        assert.ok(
+          targetHtml.includes(`id="${hashPart}"`),
+          `Broken related anchor #${hashPart} in ${filePart} (referenced by ${topic.id})`
+        );
+      }
+    }
+  }
+});
