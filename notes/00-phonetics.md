@@ -32,21 +32,21 @@ updated: 2026-11-26
 | `/ɪ/` | “一”==短音== | sit `/sɪt/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/sit.mp3), begin `/bɪˈɡɪn/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/begin.mp3) |
 | `/ɜː/` | “额”长音（e~） | bird `/bɜːd/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bird.mp3) |
 | `/ə/` | “鹅”轻短音 | open `/ˈəʊpən/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/open.mp3) |
-| `/uː/` | “乌”长音（u~） | food `/fuːd/`, two `/tuː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/two.mp3) |
-| `/ʊ/` | “无”短音 | look `/lʊk/`, put `/pʊt/` |
+| `/uː/` | “乌”长音（u~） | food `/fuːd/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/food.mp3), two `/tuː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/two.mp3) |
+| `/ʊ/` | “无”短音 | look `/lʊk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/look.mp3), put `/pʊt/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/put.mp3) |
 | `/ɔː/` | “嗷”长音（ao~） | talk `/tɔːk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/talk.mp3) |
-| `/ɒ/` | “嗷”短音 | hot `/hɒt/` |
+| `/ɒ/` | “嗷”短音 | hot `/hɒt/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/hot.mp3) |
 | `/ɑː/` | “啊”长音（a~） | arm `/ɑːm/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/arm.mp3), car `/kɑː(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/car.mp3) |
-| `/ʌ/` | “阿”短音 | duck `/dʌk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/duck.mp3), love `/lʌv/` |
-| `/æ/` | “哎”（==大嘴梅花音==） | bag `/bæɡ/`, map `/mæp/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/map.mp3) |
+| `/ʌ/` | “阿”短音 | duck `/dʌk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/duck.mp3), love `/lʌv/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/love.mp3) |
+| `/æ/` | “哎”（==大嘴梅花音==） | bag `/bæɡ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bag.mp3), map `/mæp/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/map.mp3) |
 | `/e/` | “哎”（==小嘴一指宽==） | bed `/bed/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bed.mp3), head `/hed/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/head.mp3) |
-| `/aɪ/` | “爱~” | bike `/baɪk/` |
+| `/aɪ/` | “爱~” | bike `/baɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bike.mp3) |
 | `/eɪ/` | “诶~” | cake `/keɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/cake.mp3) |
-| `/ɔɪ/` | “哦咦” | boy `/bɔɪ/` |
+| `/ɔɪ/` | “哦咦” | boy `/bɔɪ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/boy.mp3) |
 | `/ɪə/` | “一耳” | ear `/ɪə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/ear.mp3) |
 | `/eə/` | “爱儿” | bear `/beə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bear.mp3) |
 | `/ʊə/` | “吾儿” | poor `/pʊə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/poor.mp3) |
-| `/aʊ/` | “啊呜” | mouse `/maʊs/` |
+| `/aʊ/` | “啊呜” | mouse `/maʊs/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/mouse.mp3) |
 | `/əʊ/` | “欧~” | phone `/fəʊn/` |
 
 ### 辅音音标速记表（清浊对照）
@@ -57,8 +57,8 @@ updated: 2026-11-26
 | `/b/` | “波”（浊辅音） | bear `/beə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bear.mp3) |
 | `/t/` | “特”（清辅音） | talk `/tɔːk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/talk.mp3) |
 | `/d/` | “得”（浊辅音） | duck `/dʌk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/duck.mp3) |
-| `/k/` | “可”（清辅音） | bike `/baɪk/` |
-| `/ɡ/` | “哥”（浊辅音） | good `/ɡʊd/` |
+| `/k/` | “可”（清辅音） | bike `/baɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bike.mp3) |
+| `/ɡ/` | “哥”（浊辅音） | good `/ɡʊd/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/good.mp3) |
 | `/f/` | “夫”（清辅音） | fish `/fɪʃ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/fish.mp3) |
 | `/v/` | “v”咬下唇（浊辅音） | very `/ˈveri/` |
 | `/s/` | “思”（清辅音） | snake `/sneɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/snake.mp3) |
