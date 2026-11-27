@@ -47,7 +47,7 @@ updated: 2026-11-26
 | `/eə/` | “爱儿” | bear `/beə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bear.mp3) |
 | `/ʊə/` | “吾儿” | poor `/pʊə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/poor.mp3) |
 | `/aʊ/` | “啊呜” | mouse `/maʊs/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/mouse.mp3) |
-| `/əʊ/` | “欧~” | phone `/fəʊn/` |
+| `/əʊ/` | “欧~” | phone `/fəʊn/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/phone.mp3) |
 
 ### 辅音音标速记表（清浊对照）
 
@@ -60,27 +60,27 @@ updated: 2026-11-26
 | `/k/` | “可”（清辅音） | bike `/baɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/bike.mp3) |
 | `/ɡ/` | “哥”（浊辅音） | good `/ɡʊd/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/good.mp3) |
 | `/f/` | “夫”（清辅音） | fish `/fɪʃ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/fish.mp3) |
-| `/v/` | “v”咬下唇（浊辅音） | very `/ˈveri/` |
+| `/v/` | “v”咬下唇（浊辅音） | very `/ˈveri/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/very.mp3) |
 | `/s/` | “思”（清辅音） | snake `/sneɪk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/snake.mp3) |
-| `/z/` | 声带振动发“滋”（浊辅音） | zoo `/zuː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/zoo.mp3), zebra `/ˈzebrə/` |
+| `/z/` | 声带振动发“滋”（浊辅音） | zoo `/zuː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/zoo.mp3), zebra `/ˈzebrə/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/zebra.mp3) |
 | `/θ/` | ==轻咬舌尖吐气==（清辅音） | three `/θriː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/three.mp3) |
-| `/ð/` | ==轻咬舌尖振动==（浊辅音） | they `/ðeɪ/` |
+| `/ð/` | ==轻咬舌尖振动==（浊辅音） | they `/ðeɪ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/they.mp3) |
 | `/ʃ/` | “师”（清辅音） | sheep `/ʃiːp/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/sheep.mp3) |
-| `/ʒ/` | “日”（浊辅音） | pleasure `/ˈpleʒə(r)/` |
-| `/ts/` | “呲”（清辅音） | skirts `/skɜː(r)ts/` |
-| `/dz/` | “滋”（浊辅音） | words `/wɜː(r)dz/` |
-| `/tʃ/` | “吃”（清辅音） | chicken `/ˈtʃɪkɪn/` |
+| `/ʒ/` | “日”（浊辅音） | pleasure `/ˈpleʒə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/pleasure.mp3) |
+| `/ts/` | “呲”（清辅音） | skirts `/skɜː(r)ts/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/skirts.mp3) |
+| `/dz/` | “滋”（浊辅音） | words `/wɜː(r)dz/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/words.mp3) |
+| `/tʃ/` | “吃”（清辅音） | chicken `/ˈtʃɪkɪn/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/chicken.mp3) |
 | `/dʒ/` | “知”（浊辅音） | orange `/ˈɒrɪndʒ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/orange.mp3) |
 | `/tr/` | “戳”（清辅音） | tree `/triː/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/tree.mp3) |
-| `/dr/` | “桌”（浊辅音） | drink `/drɪŋk/` |
+| `/dr/` | “桌”（浊辅音） | drink `/drɪŋk/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/drink.mp3) |
 | `/m/` | “母”（双唇鼻音） | monkey `/ˈmʌŋki/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/monkey.mp3) |
 | `/n/` | “嗯”（舌尖鼻音） | nose `/nəʊz/` |
-| `/ŋ/` | “eng”（后鼻音） | king `/kɪŋ/` |
+| `/ŋ/` | “eng”（后鼻音） | king `/kɪŋ/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/king.mp3) |
 | `/h/` | “呵”（声门摩擦音） | hair `/heə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/hair.mp3) |
 | `/r/` | “若”（卷舌音） | rabbit `/ˈræbɪt/` |
 | `/l/` | 前“了”后“欧”（舌侧音） | lion `/ˈlaɪən/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/lion.mp3), ball `/bɔːl/` |
-| `/w/` | “喔”（==半元音==） | water `/ˈwɔːtə(r)/` |
-| `/j/` | “叶”（==半元音==） | yes `/jes/` |
+| `/w/` | “喔”（==半元音==） | water `/ˈwɔːtə(r)/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/water.mp3) |
+| `/j/` | “叶”（==半元音==） | yes `/jes/` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/phonetics/yes.mp3) |
 
 > [!trap] 考试易错坑：谐音助记只是入门拐杖
 > 中文谐音（如“爱”“欧”）能帮你快速记住音标大致开口方向，但英语中的长短元音（如 `/iː/` 与 `/ɪ/`、`/æ/` 与 `/e/`）不只是“拖长或缩短”，而是==舌位和口腔紧张度==不同，拼读单词时需注意区分。

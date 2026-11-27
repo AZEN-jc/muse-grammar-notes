@@ -22,10 +22,10 @@ updated: 2026-11-25
 
 | 句型 | 结构 | 关键特征 | 例句 |
 | :--- | :--- | :--- | :--- |
-| ① 主谓 | 主语 + 谓语 | 谓语为==不及物动词==，不接宾语 | `You jump!` |
-| ② 主谓宾 | 主语 + 谓语 + 宾语 | 谓语为==及物动词==，动作有承受者 | `I like cats.` |
-| ③ 主谓双宾 | 主语 + 谓语 + 间接宾语 + 直接宾语 | 间接宾语指人，直接宾语指物 | `I give you a gift.` |
-| ④ 主谓宾宾补 | 主语 + 谓语 + 宾语 + 宾补 | 宾补补充说明==宾语== | `This gift makes me happy.` |
+| ① 主谓 | 主语 + 谓语 | 谓语为==不及物动词==，不接宾语 | `You jump!` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/you-jump.mp3) |
+| ② 主谓宾 | 主语 + 谓语 + 宾语 | 谓语为==及物动词==，动作有承受者 | `I like cats.` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/i-like-cats.mp3) |
+| ③ 主谓双宾 | 主语 + 谓语 + 间接宾语 + 直接宾语 | 间接宾语指人，直接宾语指物 | `I give you a gift.` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/i-give-you-a-gift.mp3) |
+| ④ 主谓宾宾补 | 主语 + 谓语 + 宾语 + 宾补 | 宾补补充说明==宾语== | `This gift makes me happy.` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/this-gift-makes-me-happy.mp3) |
 | ⑤ 主系表 | 主语 + 系动词 + 表语 | 表语说明==主语==的性质或身份 | `I am a teacher.` |
 
 > [!formula] 五大基本句型公式
@@ -39,7 +39,7 @@ updated: 2026-11-25
 
 - **主语**：一般位于谓语动词前，常由名词、代词充当
 - **谓语**：说明主语干什么、怎么样
-- **例句**：`You ==jump==!` / `I ==jump==!`
+- **例句**：`You ==jump==!` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/you-jump.mp3) / `I ==jump==!` [🔊](https://raw.githubusercontent.com/AZEN-jc/muse-grammar-notes/main/assets/audio/sentences/i-jump.mp3)
 
 常见不及物动词：`go` `come` `happen` `listen` `rise` `arrive` `stay` `live` `talk` `work`
 
